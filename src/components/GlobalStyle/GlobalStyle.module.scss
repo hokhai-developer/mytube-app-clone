@@ -1,5 +1,4 @@
 @import 'normalize.css';
-@import '../../base.scss';
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap');
 
 *,
@@ -10,6 +9,42 @@
   box-sizing: border-box;
 }
 
+//SCSS
+//media
+$mobile-width: 391px; //iphone 12pro
+$tablet-width: 769px; //ipad mini
+//color
+$white-color: white;
+$black-color: black;
+$primary-color: #ff0000;
+$secondary-color: #1b74e4;
+$background-color: #e5e5e5;
+//font
+$font-family: 'Nunito', sans-serif;
+$primary-text-color: #030303;
+$secondary-text-color: #606060;
+$thirty-text-color: #909090;
+
+//border
+$border-radius: 8px;
+//mix-xin
+@mixin maxWidth($max-width) {
+  @media only screen and (max-width: $max-width) {
+    @content;
+  }
+}
+@mixin mobile {
+  @media only screen and (max-width: $mobile-width) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media only screen and (max-width: $tablet-width) {
+    @content;
+  }
+}
+
+//html
 html {
   font-size: 62.5%;
 }
@@ -22,6 +57,7 @@ body {
   background-color: $white-color;
   color: $primary-text-color;
   overflow: overlay;
+  max-width: 1366px;
 }
 
 html *::-webkit-scrollbar {
