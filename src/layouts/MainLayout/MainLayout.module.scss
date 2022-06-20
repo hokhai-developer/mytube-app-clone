@@ -1,0 +1,27 @@
+@import '../../components/GlobalStyle/GlobalStyle.module.scss';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.container {
+  width: 100%;
+  max-width: $max-width;
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  overflow: hidden;
+
+  .body {
+    display: flex;
+    height: calc(100vh - $header-height);
+    overflow: hidden;
+    // margin-right: -(calc($max-padding - 6px));
+    .content {
+      flex: 1;
+      overflow: overlay;
+    }
+  }
+}

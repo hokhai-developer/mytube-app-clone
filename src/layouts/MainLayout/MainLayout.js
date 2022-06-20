@@ -1,24 +1,26 @@
-import React, { Children } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import classNames from 'classnames/bind';
 import Header from '~/layouts/components/Header';
 import SideBar from '~/layouts/components/SideBar';
 import { Outlet } from 'react-router-dom';
-import HomePage from '../../pages/HomePage';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Shorts from '../../pages/Shorts';
+import styles from './MainLayout.module.scss';
 
-const MainLayout = ({ children }) => {
+const cx = classNames.bind(styles);
+
+const MainLayout = () => {
   return (
-    <div>
-      <Header />
-      <SideBar />
-      <Outlet />
+    <div className={cx('wrapper')}>
+      <div className={cx('container')}>
+        <Header />
+        <div className={cx('body')}>
+          <SideBar />
+          <div className={cx('content')}>
+            <Outlet />
+          </div>
+        </div>
+      </div>
     </div>
   );
-};
-
-MainLayout.propTypes = {
-  children: PropTypes.node,
 };
 
 export default MainLayout;

@@ -1,0 +1,36 @@
+@import '../../../../components/GlobalStyle/GlobalStyle.module.scss';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .btn {
+    @include box-icon;
+    position: relative;
+    &:active {
+      color: $primary-color;
+    }
+  }
+  .btn-signIn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $secondary-color;
+    background-color: transparent;
+    height: 38px;
+
+    .user-icon {
+      color: $secondary-color;
+    }
+
+    .btn-title {
+      font-size: 1.2rem;
+      line-height: 1;
+      font-weight: 600;
+      color: $secondary-color;
+      text-transform: uppercase;
+      padding-right: $min-padding;
+    }
+  }
+}

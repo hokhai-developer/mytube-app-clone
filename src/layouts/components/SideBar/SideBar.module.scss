@@ -1,0 +1,9 @@
+@import '../../../components/GlobalStyle//GlobalStyle.module.scss';
+.wrapper {
+  padding-left: $max-padding;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 240px;
+  border-right: 1px solid red;
+}

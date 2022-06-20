@@ -19,17 +19,30 @@ $black-color: black;
 $primary-color: #ff0000;
 $secondary-color: #1b74e4;
 $background-color: #e5e5e5;
+$btn-background-color: #f8f8f8;
+$btn-background-color-hover: #f0f0f0;
 //font
 $font-family: 'Nunito', sans-serif;
 $primary-text-color: #030303;
 $secondary-text-color: #606060;
 $thirty-text-color: #909090;
-
 //border
-$border-radius: 8px;
+$border-radius: 4px;
+$border-color: #d3d3d3;
+//width
+$max-width: 1366px;
+$header-height: 56px;
+$box-icon-width: 40px;
+$min-padding: 8px;
+$medium-padding: 12px;
+$max-padding: 16px;
+$min-gap: 10px;
+$medium-gap: 15px;
+$max-gap: 20px;
+
 //mix-xin
-@mixin maxWidth($max-width) {
-  @media only screen and (max-width: $max-width) {
+@mixin maxWidth($max-screen-width) {
+  @media only screen and (max-width: $max-screen-width) {
     @content;
   }
 }
@@ -42,6 +55,15 @@ $border-radius: 8px;
   @media only screen and (max-width: $tablet-width) {
     @content;
   }
+}
+@mixin box-icon($width: $box-icon-width) {
+  width: $width;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 //html
@@ -57,22 +79,23 @@ body {
   background-color: $white-color;
   color: $primary-text-color;
   overflow: overlay;
-  max-width: 1366px;
 }
 
 html *::-webkit-scrollbar {
   border-radius: 0;
-  width: 8px;
+  width: 28px;
 }
 
 html *::-webkit-scrollbar-thumb {
-  border-radius: $border-radius;
-  border: 8px solid transparent;
-  background-color: $primary-color;
+  border-radius: 16px;
+  cursor: pointer;
+  background-color: #5c5c5c;
+  border: 8px solid $background-color;
 }
 
 html *::-webkit-scrollbar-track {
   border-radius: 0;
+  margin-top: -8px;
   background-color: transparent;
 }
 

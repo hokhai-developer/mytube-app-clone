@@ -1,0 +1,43 @@
+@import '../../../../components/GlobalStyle/GlobalStyle.module.scss';
+.wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid $border-color;
+
+  .search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    background-color: transparent;
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .search-input {
+    flex: 1;
+  }
+  .clear-btn {
+    @include box-icon;
+  }
+  .search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid $border-color;
+    width: calc(50px + $max-padding);
+    height: 40px;
+    background-color: $btn-background-color;
+    cursor: pointer;
+    &:hover {
+      background-color: $btn-background-color-hover;
+    }
+  }
+}
+
+//headlessTippy
+.search-box {
+  max-width: 632px;
+  background-color: greenyellow;
+}

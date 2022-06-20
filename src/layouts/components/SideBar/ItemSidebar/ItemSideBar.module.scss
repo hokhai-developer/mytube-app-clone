@@ -1,0 +1,34 @@
+@import '../../../../components/GlobalStyle/GlobalStyle.module.scss';
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0 24px;
+  background-color: $white-color;
+  width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $btn-background-color-hover;
+  }
+
+  .btn {
+    @include box-icon;
+    &.chanel {
+      border-radius: 50%;
+    }
+  }
+  .title {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: $primary-text-color;
+  }
+}
+.active {
+  color: $primary-color;
+  background-color: $background-color;
+  border-radius: $border-radius;
+}
+.active .title {
+  color: currentColor;
+}

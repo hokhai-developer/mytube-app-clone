@@ -1,3 +1,6 @@
-export default Images = {
-  noImage: require('~/assets/images/no-image.png'),
+const Images = {
+  noImage: require('~/assets/Images/Images/no-image.png'),
+  userAvatar: require('~/assets/Images/Images/avatar.jpg'),
 };
+
+export default Images;

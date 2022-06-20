@@ -13,6 +13,8 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
           <Route path="/shorts" element={<Shorts />} />
+          <Route path="/explore" element={<Shorts />} />
+          <Route path="/subscriptions" element={<Shorts />} />
         </Route>
 
         <Route path="/notfound" element={<LayoutNotfound />}>
