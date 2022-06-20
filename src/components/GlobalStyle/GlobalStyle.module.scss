@@ -14,31 +14,32 @@
 $mobile-width: 391px; //iphone 12pro
 $tablet-width: 769px; //ipad mini
 //color
-$white-color: white;
-$black-color: black;
-$primary-color: #ff0000;
-$secondary-color: #1b74e4;
-$background-color: #e5e5e5;
-$btn-background-color: #f8f8f8;
-$btn-background-color-hover: #f0f0f0;
+$color-white: white;
+$color-black: black;
+$color-primary: #ff0000;
+$color-secondary: #1b74e4;
+$color-background: #e5e5e5;
+$color-background-focus: #cacaca;
+$color-background-btn: #f8f8f8;
+$color-background-btn-hover: #f0f0f0;
 //font
 $font-family: 'Nunito', sans-serif;
-$primary-text-color: #030303;
-$secondary-text-color: #606060;
-$thirty-text-color: #909090;
+$color-text-primary: #030303;
+$color-text-secondary: #606060;
+$color-text-thirty: #909090;
 //border
 $border-radius: 4px;
-$border-color: #d3d3d3;
+$color-border: #d3d3d3;
 //width
 $max-width: 1366px;
 $header-height: 56px;
-$box-icon-width: 40px;
-$min-padding: 8px;
-$medium-padding: 12px;
-$max-padding: 16px;
-$min-gap: 10px;
-$medium-gap: 15px;
-$max-gap: 20px;
+$btn-icon-width: 40px;
+$padding-min: 8px;
+$padding-medium: 12px;
+$padding-max: 16px;
+$gap-min: 10px;
+$gap-medium: 15px;
+$gap-max: 20px;
 
 //mix-xin
 @mixin maxWidth($max-screen-width) {
@@ -56,7 +57,7 @@ $max-gap: 20px;
     @content;
   }
 }
-@mixin box-icon($width: $box-icon-width) {
+@mixin btn-icon($width: $btn-icon-width) {
   width: $width;
   aspect-ratio: 1/1;
   display: flex;
@@ -64,6 +65,14 @@ $max-gap: 20px;
   justify-content: center;
   background-color: transparent;
   cursor: pointer;
+}
+@mixin text-clamp($LineClamp) {
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: $LineClamp;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 //html
@@ -76,29 +85,25 @@ body {
   line-height: 1.5;
   text-rendering: optimizeSpeed;
   font-family: $font-family;
-  background-color: $white-color;
-  color: $primary-text-color;
+  background-color: $color-white;
+  color: $color-text-primary;
   overflow: overlay;
 }
 
 html *::-webkit-scrollbar {
   border-radius: 0;
-  width: 28px;
+  width: 8px;
 }
 
 html *::-webkit-scrollbar-thumb {
-  border-radius: 16px;
-  cursor: pointer;
-  background-color: #5c5c5c;
-  border: 8px solid $background-color;
+  border-radius: 4px;
+  background-color: #8c8c8c;
 }
 
 html *::-webkit-scrollbar-track {
   border-radius: 0;
-  margin-top: -8px;
   background-color: transparent;
 }
-
 button,
 input,
 [tabIndex] {

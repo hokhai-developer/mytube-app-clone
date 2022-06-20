@@ -4,22 +4,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 $max-padding;
+  padding: 0 $padding-max;
   height: $header-height;
-  border-bottom: 1px solid $primary-color;
+  border-bottom: 1px solid $color-primary;
 
   .header-left {
     display: flex;
     align-items: center;
     .btn {
-      @include box-icon;
+      @include btn-icon;
     }
     .logo-link {
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-      padding: $medium-padding $max-padding;
+      padding: $padding-medium $padding-max;
       .logo-icon {
         width: 90px;
         height: 20px;
@@ -30,7 +30,7 @@
         top: 0;
         right: 0;
         font-weight: 600;
-        color: $secondary-text-color;
+        color: $color-text-secondary;
         transform: translate(4px, 6px);
       }
     }
@@ -39,7 +39,7 @@
   .header-center {
     flex: 1;
     max-width: 640px;
-    padding: 0 $min-padding/2;
+    padding: 0 $padding-min/2;
   }
   .header-right {
   }

@@ -192,7 +192,11 @@ export const LanguageIcon = ({
     </g>
   </svg>
 );
-export const Feedback = ({ width = '24px', height = '24px', className }) => (
+export const FeedbackIcon = ({
+  width = '24px',
+  height = '24px',
+  className,
+}) => (
   <svg
     viewBox="0 0 24 24"
     preserveAspectRatio="xMidYMid meet"
@@ -357,7 +361,7 @@ export const SubscriptionsIcon = ({
     </g>
   </svg>
 );
-export const LibaryIcon = ({ width = '24px', height = '24px', className }) => (
+export const LibraryIcon = ({ width = '24px', height = '24px', className }) => (
   <svg
     viewBox="0 0 24 24"
     preserveAspectRatio="xMidYMid meet"
@@ -459,7 +463,12 @@ export const LivesIcon = ({ width = '24px', height = '24px', className }) => (
     </g>
   </svg>
 );
-export const ShowIcon = ({ width = '24px', height = '24px', className }) => (
+
+export const ShowMoreIcon = ({
+  width = '24px',
+  height = '24px',
+  className,
+}) => (
   <svg
     viewBox="0 0 24 24"
     preserveAspectRatio="xMidYMid meet"
@@ -470,6 +479,24 @@ export const ShowIcon = ({ width = '24px', height = '24px', className }) => (
   >
     <g>
       <polygon points="18.4,14.6 12,8.3 5.6,14.6 6.4,15.4 12,9.7 17.6,15.4 "></polygon>
+    </g>
+  </svg>
+);
+export const ShowLessIcon = ({
+  width = '24px',
+  height = '24px',
+  className,
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    preserveAspectRatio="xMidYMid meet"
+    fill="currentColor"
+    className={className}
+    width={width}
+    height={height}
+  >
+    <g>
+      <path d="M12,15.7L5.6,9.4l0.7-0.7l5.6,5.6l5.6-5.6l0.7,0.7L12,15.7z"></path>
     </g>
   </svg>
 );
@@ -512,6 +539,20 @@ export const ReportIcon = ({ width = '24px', height = '24px', className }) => (
   >
     <g>
       <path d="M13.18,4l0.24,1.2L13.58,6h0.82H19v7h-5.18l-0.24-1.2L13.42,11H12.6H6V4H13.18 M14,3H5v18h1v-9h6.6l0.4,2h7V5h-5.6L14,3 L14,3z"></path>
+    </g>
+  </svg>
+);
+export const HelpIcon = ({ width = '24px', height = '24px', className }) => (
+  <svg
+    viewBox="0 0 24 24"
+    preserveAspectRatio="xMidYMid meet"
+    fill="currentColor"
+    className={className}
+    width={width}
+    height={height}
+  >
+    <g>
+      <path d="M15.36,9.96c0,1.09-0.67,1.67-1.31,2.24c-0.53,0.47-1.03,0.9-1.16,1.6L12.85,14h-1.75l0.03-0.28 c0.14-1.17,0.8-1.76,1.47-2.27c0.52-0.4,1.01-0.77,1.01-1.49c0-0.51-0.23-0.97-0.63-1.29c-0.4-0.31-0.92-0.42-1.42-0.29 c-0.59,0.15-1.05,0.67-1.19,1.34L10.32,10H8.57l0.06-0.42c0.2-1.4,1.15-2.53,2.42-2.87c1.05-0.29,2.14-0.08,2.98,0.57 C14.88,7.92,15.36,8.9,15.36,9.96z M12,18c0.55,0,1-0.45,1-1s-0.45-1-1-1s-1,0.45-1,1S11.45,18,12,18z M12,3c-4.96,0-9,4.04-9,9 s4.04,9,9,9s9-4.04,9-9S16.96,3,12,3 M12,2c5.52,0,10,4.48,10,10s-4.48,10-10,10S2,17.52,2,12S6.48,2,12,2L12,2z"></path>
     </g>
   </svg>
 );

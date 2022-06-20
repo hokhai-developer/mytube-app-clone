@@ -1,7 +1,7 @@
 @import '../../components/GlobalStyle/GlobalStyle.module.scss';
 
 .wrapper {
-  @include box-icon;
+  @include btn-icon;
   overflow: hidden;
   .image {
     width: 100%;

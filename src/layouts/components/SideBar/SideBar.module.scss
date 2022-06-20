@@ -1,9 +1,51 @@
 @import '../../../components/GlobalStyle//GlobalStyle.module.scss';
 .wrapper {
-  padding-left: $max-padding;
+  padding-left: $padding-max;
+  padding-bottom: $padding-max;
+  padding-right: $padding-min;
   display: flex;
   align-items: center;
   flex-direction: column;
   width: 240px;
-  border-right: 1px solid red;
+  height: calc(100vh - $header-height);
+  overflow: overlay;
+
+  section {
+    width: 100%;
+  }
+
+  .subscriptions {
+    .sub-title {
+      text-transform: uppercase;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 8px 24px 8px 0;
+      color: $color-text-primary;
+    }
+  }
+
+  .more-from-youtube {
+    .more-from-youtube {
+      text-transform: uppercase;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 8px 24px 8px 0;
+      color: $color-text-primary;
+    }
+  }
+  footer {
+    width: 100%;
+    .footer-mail {
+      font-size: 1rem;
+      text-align: center;
+      .email {
+        font-size: 1.2rem;
+        color: $color-secondary;
+      }
+    }
+    .footer-bottom {
+      font-size: 1rem;
+      text-align: center;
+    }
+  }
 }

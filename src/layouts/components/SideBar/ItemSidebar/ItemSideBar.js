@@ -5,26 +5,57 @@ import styles from './ItemSideBar.module.scss';
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
-const ItemSideBar = ({ iconLeft, title, iconRight, path, channelID }) => {
+const ItemSideBar = ({
+  iconLeft,
+  title = '',
+  iconRight,
+  path = '',
+  channelID = '',
+  target = '',
+  onClick = () => {},
+  type = '',
+  ...passProps
+}) => {
+  let Comp = 'div';
+  const props = {
+    onClick,
+    ...passProps,
+  };
+  if (path) {
+    if (!target) {
+      props.to = path;
+      Comp = NavLink;
+    } else {
+      Comp = 'a';
+      props.href = path;
+      props.target = '_blank';
+    }
+  }
+
   return (
-    <NavLink
-      to={path}
-      className={(nav) =>
-        cx('item', {
-          active: nav.isActive,
-        })
+    <Comp
+      className={
+        Comp === NavLink
+          ? (nav) =>
+              cx('item', {
+                active: nav.isActive,
+                popular: type === 'popular',
+                'more-from-youtube': type === 'more-from-youtube',
+              })
+          : cx('item')
       }
+      {...props}
     >
       <div
         className={cx('btn', {
-          chanel: channelID,
+          subscriptions: type === 'subscriptions',
         })}
       >
         {iconLeft}
       </div>
       <h6 className={cx('title')}>{title}</h6>
       {iconRight && <div className={cx('icon-right')}>{iconRight}</div>}
-    </NavLink>
+    </Comp>
   );
 };
 
@@ -34,6 +65,7 @@ ItemSideBar.propTypes = {
   iconRight: PropTypes.node,
   path: PropTypes.string,
   channelID: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default ItemSideBar;

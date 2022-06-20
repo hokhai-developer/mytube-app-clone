@@ -18,7 +18,7 @@
     display: flex;
     height: calc(100vh - $header-height);
     overflow: hidden;
-    // margin-right: -(calc($max-padding - 6px));
+    // margin-right: -(calc($padding-max - 6px));
     .content {
       flex: 1;
       overflow: overlay;
