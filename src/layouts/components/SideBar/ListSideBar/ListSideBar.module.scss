@@ -1,0 +1,32 @@
+@import '../../../../components/GlobalStyle/GlobalStyle.module.scss';
+
+.wrapper {
+  width: 100%;
+  padding-bottom: $padding-min;
+  &:not(:first-child) {
+    padding-top: $padding-min;
+    border-top: 1px solid $color-border;
+  }
+  &.toggleSideBar {
+    border: none;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+
+  .title {
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding-top: $padding-min;
+    padding-bottom: $padding-min;
+    padding-left: $padding-min;
+    color: $color-text-primary;
+    user-select: none;
+    @include text-clamp(1);
+
+    &.toggleSideBar {
+      display: none;
+    }
+  }
+}

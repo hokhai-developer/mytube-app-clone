@@ -1,0 +1,58 @@
+@import '../../../../../components/GlobalStyle/GlobalStyle.module.scss';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  background-color: $color-white;
+  min-width: 216px;
+  padding-right: $padding-medium;
+  padding-left: $padding-min;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-background-btn-hover;
+  }
+
+  &.apps:first-child {
+    margin-bottom: $padding-medium;
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+
+      height: 1px;
+      background-color: $color-border;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transform: translateY($padding-medium/2);
+    }
+  }
+
+  &.apps:last-child {
+    margin-top: $padding-medium;
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      height: 1px;
+      background-color: $color-border;
+      top: 0;
+      left: 0;
+      right: 0;
+      transform: translateY(-$padding-medium/2);
+    }
+  }
+
+  .btn {
+    @include btn-icon;
+    background-color: transparent;
+  }
+
+  .title {
+    flex: 1;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: $color-text-secondary;
+  }
+}

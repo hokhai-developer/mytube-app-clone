@@ -14,7 +14,7 @@ const Search = (props) => {
       visible
       render={(attrs) => (
         <div className={cx('search-box')} tabIndex="-1" {...attrs}>
-          <SearchResult />
+          {/* <SearchResult /> */}
         </div>
       )}
     >

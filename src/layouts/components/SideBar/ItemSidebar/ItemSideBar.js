@@ -1,8 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import styles from './ItemSideBar.module.scss';
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+import { ToggleSideBarContext } from '~/context/ToggleSideBarProvider';
+import styles from './ItemSideBar.module.scss';
 
 const cx = classNames.bind(styles);
 const ItemSideBar = ({
@@ -11,11 +12,13 @@ const ItemSideBar = ({
   iconRight,
   path = '',
   channelID = '',
-  target = '',
+  target = null,
   onClick = () => {},
   type = '',
+  className,
   ...passProps
 }) => {
+  const toggleSideBar = useContext(ToggleSideBarContext);
   let Comp = 'div';
   const props = {
     onClick,
@@ -37,29 +40,44 @@ const ItemSideBar = ({
       className={
         Comp === NavLink
           ? (nav) =>
-              cx('item', {
+              cx('item', className, {
                 active: nav.isActive,
-                popular: type === 'popular',
-                'more-from-youtube': type === 'more-from-youtube',
+                [type]: type === 'popular',
+                [type]: type === 'moreFromYoutube',
+                [type]: type === 'subscriptions',
+                toggleSideBar: toggleSideBar.value,
               })
-          : cx('item')
+          : cx('item', className, {
+              toggleSideBar: toggleSideBar.value,
+            })
       }
       {...props}
     >
       <div
         className={cx('btn', {
-          subscriptions: type === 'subscriptions',
+          'avatar-channel':
+            type === 'bestOfYoutube' || type === 'subscriptions',
+          toggleSideBar: toggleSideBar.value,
         })}
       >
         {iconLeft}
       </div>
-      <h6 className={cx('title')}>{title}</h6>
+      <h6
+        className={cx('title', {
+          toggleSideBar: toggleSideBar.value,
+        })}
+      >
+        {title}
+      </h6>
       {iconRight && <div className={cx('icon-right')}>{iconRight}</div>}
     </Comp>
   );
 };
 
 ItemSideBar.propTypes = {
+  target: PropTypes.bool,
+  type: PropTypes.string,
+  className: PropTypes.string,
   iconLeft: PropTypes.node,
   title: PropTypes.string,
   iconRight: PropTypes.node,

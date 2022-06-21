@@ -1,0 +1,33 @@
+@import '../../../../../components/GlobalStyle/GlobalStyle.module.scss';
+
+.search-box {
+  height: calc(100vh - $header-height);
+  .header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: $padding-min;
+    border-bottom: 1px solid $color-border;
+    min-width: 300px;
+    overflow-y: overlay;
+
+    .btn {
+      @include btn-icon;
+      background-color: transparent;
+    }
+    .title {
+      flex: 1;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: $color-text-secondary;
+    }
+  }
+
+  .popper {
+    border: 1px solid $color-border;
+    border-radius: $border-radius;
+    background-color: $color-white;
+    gap: $gap-min 0;
+    padding: $padding-min 0;
+  }
+}

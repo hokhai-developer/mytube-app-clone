@@ -4,37 +4,40 @@
   padding-bottom: $padding-max;
   padding-right: $padding-min;
   display: flex;
+  max-width: 240px;
   align-items: center;
   flex-direction: column;
-  width: 240px;
   height: calc(100vh - $header-height);
-  overflow: overlay;
+  overflow-y: overlay;
 
-  section {
-    width: 100%;
+  &.toggleSideBar {
+    max-width: 72px;
+    padding: 0;
+    // padding-left: $padding-max;
+    overflow: hidden;
   }
-
-  .subscriptions {
-    .sub-title {
-      text-transform: uppercase;
-      font-size: 1.2rem;
-      font-weight: 600;
-      padding: 8px 24px 8px 0;
-      color: $color-text-primary;
+  //sign in
+  .sign-in {
+    padding: $padding-min 0 $padding-medium;
+    border-top: 1px solid $color-border;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $gap-min 0;
+    .title {
+      font-size: 1.3rem;
+      text-align: center;
+    }
+    .btn-signIn {
+      padding: $padding-medium $padding-max;
+      border-radius: $border-radius;
     }
   }
 
-  .more-from-youtube {
-    .more-from-youtube {
-      text-transform: uppercase;
-      font-size: 1.2rem;
-      font-weight: 600;
-      padding: 8px 24px 8px 0;
-      color: $color-text-primary;
-    }
-  }
   footer {
     width: 100%;
+    padding-top: $padding-medium;
+    border-top: 1px solid $color-border;
     .footer-mail {
       font-size: 1rem;
       text-align: center;
@@ -48,4 +51,10 @@
       text-align: center;
     }
   }
+}
+
+.show {
+  margin-top: -$padding-min;
+  margin-bottom: $padding-min;
+  font-size: 1.3rem;
 }

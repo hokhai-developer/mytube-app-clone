@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import GlobalStyle from '~/components/GlobalStyle';
 import App from './App';
+import ToggleSideBarProvider from '~/context/ToggleSideBarProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <GlobalStyle>
-    <App />
+    <ToggleSideBarProvider>
+      <App />
+    </ToggleSideBarProvider>
   </GlobalStyle>,
 );
 

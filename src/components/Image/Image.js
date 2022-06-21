@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import Images from '~/assets/Images';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import styles from './Image.module.scss';
 
 const cx = classNames.bind(styles);
-const Image = ({ src, alt, className, fallback }) => {
+const Image = forwardRef(({ src, alt, className, fallback }, ref) => {
   const [srcImg, setSrcImage] = useState(src);
   const handleError = () => {
     let srcImg = fallback ? fallback : Images.noImage;
@@ -21,7 +21,7 @@ const Image = ({ src, alt, className, fallback }) => {
       />
     </div>
   );
-};
+});
 
 Image.propTypes = {
   src: PropTypes.string,

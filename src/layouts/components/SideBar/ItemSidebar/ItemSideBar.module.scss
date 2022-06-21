@@ -8,58 +8,51 @@
   width: 100%;
   cursor: pointer;
 
+  &.toggleSideBar {
+    flex-direction: column;
+  }
+
+  &.subscriptions {
+    height: 40px;
+  }
+
   &:hover {
     background-color: $color-background-btn-hover;
   }
 
   .btn {
     @include btn-icon;
-    &.subscriptions {
+    &.avatar-channel {
+      transform: scale(0.6);
       border-radius: 50%;
       overflow: hidden;
     }
     flex-shrink: 0;
+    &.toggleSideBar {
+      @include btn-icon(30px);
+    }
   }
 
   .title {
     @include text-clamp(1);
+    max-width: 100%;
     padding-left: $padding-medium;
     flex: 1;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 300;
     color: $color-text-primary;
+    &.toggleSideBar {
+      font-size: 1rem;
+      padding-left: 0;
+      padding-bottom: $padding-min;
+      @include text-clamp(1);
+    }
   }
 
   .icon-right {
     flex-shrink: 0;
     @include btn-icon;
     color: $color-primary;
-  }
-
-  &.popular:nth-child(4) {
-    margin-bottom: $padding-max;
-    position: relative;
-    &::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 1px;
-      bottom: -$padding-min;
-      background-color: $color-background-focus;
-    }
-  }
-
-  &.more-from-youtube:nth-child(3) {
-    margin-bottom: $padding-max;
-    position: relative;
-    &::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 1px;
-      bottom: -$padding-min;
-      background-color: $color-background-focus;
-    }
   }
 }
 .active {
