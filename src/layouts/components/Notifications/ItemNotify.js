@@ -4,7 +4,7 @@ import { SettingsIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import PropTypes from 'prop-types';
 import styles from './Notifications.module.scss';
-import { MENU_SETTINGS_NOTIFY } from '~/layouts/components/Header/Action/DataMenu';
+import { MENU_SETTINGS_NOTIFY } from '~/layouts/components/Action/DataMenu';
 import Menu from '~/components/Menu';
 
 const cx = classNames.bind(styles);

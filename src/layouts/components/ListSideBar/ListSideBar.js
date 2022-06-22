@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { ToggleSideBarContext } from '~/context/ToggleSideBarProvider';
-import ItemSideBar from '~/layouts/components/SideBar/ItemSidebar';
+import ItemSideBar from '../ItemSidebar';
 import styles from './ListSideBar.module.scss';
 const cx = classNames.bind(styles);
 

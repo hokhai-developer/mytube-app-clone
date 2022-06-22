@@ -12,7 +12,7 @@ import {
 import Image from '~/components/Image';
 import { ToggleSideBarContext } from '~/context/ToggleSideBarProvider';
 import ButtonSignIn from '~/layouts/components/ButtonSignIn';
-import ItemSideBar from '~/layouts/components/SideBar/ItemSidebar';
+import ItemSideBar from '../ItemSidebar';
 import {
   MENU_BEST_OF_YOUTUBE,
   MENU_DATA_LIBRARY,
@@ -20,7 +20,7 @@ import {
   MENU_MORE_FROM_YOUTUBE,
   MENU_SETTINGS,
 } from './DataMenu';
-import ListSideBar from './ListSideBar';
+import ListSideBar from '../ListSideBar';
 import styles from './SideBar.module.scss';
 import { useSelector } from 'react-redux';
 import { authSelector } from '~/Redux/selector';

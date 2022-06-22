@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import { ToggleSideBarContext } from '~/context/ToggleSideBarProvider';
 
 import { ToggleIcon, LogoIcon } from '~/components/Icons';
-import Search from './Search';
-import Action from './Action';
+import Search from '../Search';
+import Action from '../Action';
 
 const cx = classNames.bind(styles);
 const Header = (props) => {
