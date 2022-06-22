@@ -874,3 +874,112 @@ export const HideEyeIcon = ({ width = '24px', height = '24px', className }) => (
     </g>
   </svg>
 );
+export const VerifiedIcon = ({
+  width = '14px',
+  height = '14px',
+  className,
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    preserveAspectRatio="xMidYMid meet"
+    fill="currentColor"
+    className={className}
+    width={width}
+    height={height}
+  >
+    <g>
+      <path d="M12,2C6.5,2,2,6.5,2,12c0,5.5,4.5,10,10,10s10-4.5,10-10C22,6.5,17.5,2,12,2z M9.8,17.3l-4.2-4.1L7,11.8l2.8,2.7L17,7.4 l1.4,1.4L9.8,17.3z"></path>
+    </g>
+  </svg>
+);
+export const AddToQueueIcon = ({
+  width = '24px',
+  height = '24px',
+  className,
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    preserveAspectRatio="xMidYMid meet"
+    fill="currentColor"
+    className={className}
+    width={width}
+    height={height}
+  >
+    <g>
+      <path d="M21,16h-7v-1h7V16z M21,11H9v1h12V11z M21,7H3v1h18V7z M10,15l-7-4v8L10,15z"></path>
+    </g>
+  </svg>
+);
+export const AddToPlaylistIcon = ({
+  width = '24px',
+  height = '24px',
+  className,
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    preserveAspectRatio="xMidYMid meet"
+    fill="currentColor"
+    className={className}
+    width={width}
+    height={height}
+  >
+    <g>
+      <path d="M22,13h-4v4h-2v-4h-4v-2h4V7h2v4h4V13z M14,7H2v1h12V7z M2,12h8v-1H2V12z M2,16h8v-1H2V16z"></path>
+    </g>
+  </svg>
+);
+export const ShareIcon = ({ width = '24px', height = '24px', className }) => (
+  <svg
+    viewBox="0 0 24 24"
+    preserveAspectRatio="xMidYMid meet"
+    fill="currentColor"
+    className={className}
+    width={width}
+    height={height}
+  >
+    <g>
+      <path d="M15,5.63L20.66,12L15,18.37V15v-1h-1c-3.96,0-7.14,1-9.75,3.09c1.84-4.07,5.11-6.4,9.89-7.1L15,9.86V9V5.63 M14,3v6 C6.22,10.13,3.11,15.33,2,21c2.78-3.97,6.44-6,12-6v6l8-9L14,3L14,3z"></path>
+    </g>
+  </svg>
+);
+
+export const NotInterestedIcon = ({
+  width = '24px',
+  height = '24px',
+  className,
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    preserveAspectRatio="xMidYMid meet"
+    fill="currentColor"
+    className={className}
+    width={width}
+    height={height}
+  >
+    <g>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M18.71 6C20.13 7.59 21 9.69 21 12c0 4.97-4.03 9-9 9-2.31 0-4.41-.87-6-2.29L18.71 6zM3 12c0-4.97 4.03-9 9-9 2.31 0 4.41.87 6 2.29L5.29 18C3.87 16.41 3 14.31 3 12zm9-10c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"
+      ></path>
+    </g>
+  </svg>
+);
+export const DoNotRecommendIcon = ({
+  width = '24px',
+  height = '24px',
+  className,
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    preserveAspectRatio="xMidYMid meet"
+    fill="currentColor"
+    className={className}
+    width={width}
+    height={height}
+  >
+    <g>
+      <path d="M12,3c-4.96,0-9,4.04-9,9s4.04,9,9,9s9-4.04,9-9S16.96,3,12,3 M12,2c5.52,0,10,4.48,10,10s-4.48,10-10,10S2,17.52,2,12 S6.48,2,12,2L12,2z M19,13H5v-2h14V13z"></path>
+    </g>
+  </svg>
+);

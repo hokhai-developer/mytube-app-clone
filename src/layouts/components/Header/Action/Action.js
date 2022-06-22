@@ -10,11 +10,10 @@ import {
 } from '~/components/Icons';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import Images from '~/assets/Images';
 import Image from '~/components/Image';
 import ButtonSignIn from '~/layouts/components/ButtonSignIn';
-import Menu from './Menu';
-import Notifications from './Notifications';
+import Menu from '~/components/Menu';
+import Notifications from '~/layouts/components/Notifications';
 import { MENU_APPS, MENU_SETTINGS, MENU_CREATE, MENU_USER } from './DataMenu';
 import { authSelector } from '~/Redux/selector';
 import { useSelector } from 'react-redux';
@@ -77,7 +76,7 @@ const Action = (props) => {
         <Notifications
           zIndex={950}
           placement={'left-start'}
-          offset={[0, 0]}
+          offset={[-20, 0]}
           show={showNotification}
           setShow={setShowNotification}
           delay={[100, 100]}
@@ -119,8 +118,8 @@ const Action = (props) => {
           showMenu={showMenuSettings}
           setShowMenu={setShowMenuSettings}
           data={MENU_USER}
-          offset={[-300, 4]}
-          placement={'bottom-start'}
+          offset={[-10, 0]}
+          placement={'left-start'}
         >
           <div
             onClick={() => setShowMenuSettings(!showMenuSettings)}

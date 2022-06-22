@@ -1,10 +1,10 @@
-@import '../../../../../components/GlobalStyle/GlobalStyle.module.scss';
+@import '../GlobalStyle/GlobalStyle.module.scss';
 
 .wrapper {
   display: flex;
   align-items: center;
   background-color: $color-white;
-  min-width: 216px;
+  // min-width: 216px;
   padding-right: $padding-medium;
   padding-left: $padding-min;
   cursor: pointer;
@@ -44,10 +44,11 @@
     }
   }
 
-  &.user:nth-child(2) {
-    margin-top: $padding-min;
+  &.user:nth-child(1) {
+    margin-top: $padding-min/2;
   }
-  &.user:nth-child(6) {
+  &.user:nth-child(5),
+  &.settingsVideoItem:nth-child(4) {
     position: relative;
     margin-bottom: $padding-max;
     &::after {
@@ -69,7 +70,7 @@
 
   .title {
     flex: 1;
-    font-size: 1.4rem;
+    font-size: 14px;
     font-weight: 300;
     color: $color-text-secondary;
 

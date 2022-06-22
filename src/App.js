@@ -1,5 +1,5 @@
 import MainLayout from '~/layouts/MainLayout';
-import Shorts from '~/pages/Shorts';
+import Search from '~/pages/Search';
 import HomePage from '~/pages/HomePage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LayoutNotfound from './layouts/LayoutNotfound';
@@ -40,9 +40,10 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="/shorts" element={<Shorts />} />
-          <Route path="/explore" element={<Shorts />} />
-          <Route path="/subscriptions" element={<Shorts />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/shorts" element={<Search />} />
+          <Route path="/explore" element={<Search />} />
+          <Route path="/subscriptions" element={<Search />} />
         </Route>
 
         <Route path="/notfound" element={<LayoutNotfound />}>

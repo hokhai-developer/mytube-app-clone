@@ -1,26 +1,15 @@
 @import '../../components/GlobalStyle/GlobalStyle.module.scss';
 
-.test1 {
-  color: red;
-  font-weight: 300;
-}
-.test2 {
-  color: red;
-  font-weight: 300;
-}
-.test3 {
-  color: red;
-  font-weight: 400;
-}
-.test4 {
-  color: red;
-  font-weight: 400;
-}
-.test5 {
-  color: red;
-  font-weight: 500;
-}
-.test6 {
-  color: red;
-  font-weight: 500;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .wrapper-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: $padding-medium $padding-max;
+    background-color: $color-background;
+  }
 }

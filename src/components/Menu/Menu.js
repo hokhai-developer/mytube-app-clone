@@ -16,6 +16,7 @@ import { authSelector } from '~/Redux/selector';
 
 const cx = classNames.bind(styles);
 const Menu = ({
+  maxWidth,
   children,
   placement,
   data,
@@ -60,11 +61,13 @@ const Menu = ({
   };
 
   const renderItem = (attrs) => (
-    <div className={cx('search-box')} tabIndex="-1" {...attrs}>
+    <div className={cx('wrapper-menu')} tabIndex="-1" {...attrs}>
       <div className={cx('popper')}>
         {currentMenu.type === 'user' && (
           <header className={cx('header-account')}>
-            <Image src={auth.user.photoURL} alt={auth.user.displayName} />
+            <div className={cx('avatar-user')}>
+              <Image src={auth.user.photoURL} alt={auth.user.displayName} />
+            </div>
             <div className={cx('user-info')}>
               <p className={cx('user-name')}>{auth.user.displayName}</p>
               <a
@@ -85,25 +88,27 @@ const Menu = ({
             <h5 className={cx('title')}>Choose your {currentMenu.type}</h5>
           </header>
         )}
-        {currentMenu.values.length > 0 &&
-          currentMenu.values.map((item) => {
-            return (
-              <MenuItem
-                onClick={() => {
-                  handleNexMenu(item);
-                }}
-                key={item.id}
-                type={item.type}
-                id={item.id}
-                path={item.path}
-                target={item.target}
-                leftIcon={item.leftIcon}
-                title={item.title}
-                rightIcon={item.children ? true : false}
-                pathPreventive={item.pathPreventive}
-              />
-            );
-          })}
+        <div className={cx('menu-body')}>
+          {currentMenu.values.length > 0 &&
+            currentMenu.values.map((item) => {
+              return (
+                <MenuItem
+                  onClick={() => {
+                    handleNexMenu(item);
+                  }}
+                  key={item.id}
+                  type={item.type}
+                  id={item.id}
+                  path={item.path}
+                  target={item.target}
+                  leftIcon={item.leftIcon}
+                  title={item.title}
+                  rightIcon={item.children ? true : false}
+                  pathPreventive={item.pathPreventive}
+                />
+              );
+            })}
+        </div>
       </div>
     </div>
   );
@@ -112,6 +117,7 @@ const Menu = ({
     <div>
       {menu.length > 0 && (
         <Tippy
+          maxWidth={maxWidth}
           placement={placement}
           interactive
           visible={showMenu}

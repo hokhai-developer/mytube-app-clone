@@ -5,9 +5,7 @@ import Image from '~/components/Image';
 import PropTypes from 'prop-types';
 import styles from './Notifications.module.scss';
 import { MENU_SETTINGS_NOTIFY } from '~/layouts/components/Header/Action/DataMenu';
-import Menu from '../Menu';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
+import Menu from '~/components/Menu';
 
 const cx = classNames.bind(styles);
 const ItemNotify = (props) => {

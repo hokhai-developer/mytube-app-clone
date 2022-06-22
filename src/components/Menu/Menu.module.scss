@@ -1,14 +1,13 @@
-@import '../../../../../components/GlobalStyle/GlobalStyle.module.scss';
+@import '../GlobalStyle/GlobalStyle.module.scss';
 
-.search-box {
-  height: calc(100vh - $header-height);
-  overflow: overlay;
-
+.wrapper-menu {
   .popper {
+    max-height: calc(100vh - $header-height);
+    overflow: hidden;
+    // min-width: 253px;
     border: 1px solid $color-border;
     border-radius: $border-radius;
     background-color: $color-white;
-
     gap: $gap-min 0;
     padding: $padding-min 0;
 
@@ -16,8 +15,16 @@
       display: flex;
       align-items: center;
       gap: 0 $gap-medium;
-      padding: 0 $padding-min $padding-min;
+      padding: 0 $padding-max $padding-min;
       border-bottom: 1px solid $color-border;
+
+      .avatar-user {
+        width: 40px;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+
       .user-info {
         display: flex;
         flex-direction: column;
@@ -27,6 +34,7 @@
           font-weight: 500;
           color: $color-text-primary;
         }
+
         .user-link {
           font-size: 14px;
           outline: none;
@@ -54,6 +62,12 @@
         font-weight: 400;
         color: $color-text-secondary;
       }
+    }
+
+    .menu-body {
+      max-height: calc(100vh - $header-height - 40px);
+      overflow: overlay;
+      // padding-bottom: $padding-max;
     }
   }
 }
