@@ -4,9 +4,37 @@ import HomePage from '~/pages/HomePage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LayoutNotfound from './layouts/LayoutNotfound';
 import Notfound from './pages/Notfound/Notfound';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { Auth } from '~/firebase/firebaseConfig';
+import { useDispatch, useSelector } from 'react-redux';
+import authSlice from '~/Redux/authSlice';
+import { authSelector } from '~/Redux/selector';
 
 function App() {
+  const dispatch = useDispatch();
+  const auth = useSelector(authSelector);
+  useEffect(() => {
+    const authChange = onAuthStateChanged(Auth, (user) => {
+      if (user) {
+        const { accessToken, displayName, email, uid, photoURL } = user;
+        dispatch(
+          authSlice.actions.signInAuth({
+            accessToken,
+            displayName,
+            email,
+            uid,
+            photoURL,
+          }),
+        );
+      } else {
+        dispatch(authSlice.actions.signOutAuth());
+      }
+    });
+    return () => {
+      authChange();
+    };
+  }, [auth.status]);
   return (
     <Router>
       <Routes>

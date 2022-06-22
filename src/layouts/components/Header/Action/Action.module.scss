@@ -15,4 +15,11 @@
       color: $color-primary;
     }
   }
+
+  .user-avatar {
+    overflow: hidden;
+    border-radius: 50%;
+    object-fit: cover;
+    transform: scale(0.8);
+  }
 }

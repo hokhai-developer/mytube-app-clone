@@ -16,11 +16,11 @@ const MenuItem = ({
   rightIcon,
   pathPreventive,
   onClick,
-  menuChildren,
   ...passProps
 }) => {
   let Comp = 'div';
   const props = {
+    onClick,
     ...passProps,
   };
 
@@ -38,13 +38,18 @@ const MenuItem = ({
   return (
     <Comp
       {...props}
-      onClick={() => onClick(menuChildren)}
       className={cx('wrapper', {
         [type]: !!type,
       })}
     >
       <button className={cx('btn')}>{leftIcon ? leftIcon : ''}</button>
-      <h5 className={cx('title')}>{title}</h5>
+      <h5
+        className={cx('title', {
+          [type]: type,
+        })}
+      >
+        {title}
+      </h5>
       {rightIcon && (
         <button className={cx('btn')}>
           <NextIcon />

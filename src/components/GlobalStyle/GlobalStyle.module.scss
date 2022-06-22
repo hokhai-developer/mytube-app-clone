@@ -1,6 +1,4 @@
 @import 'normalize.css';
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap');
-
 *,
 *::after,
 *::before {
@@ -23,7 +21,7 @@ $color-background-focus: #cacaca;
 $color-background-btn: #f8f8f8;
 $color-background-btn-hover: #f0f0f0;
 //font
-$font-family: 'Nunito', sans-serif;
+$font-family: 'ProximaNova', sans-serif;
 $color-text-primary: #030303;
 $color-text-secondary: #606060;
 $color-text-thirty: #909090;
@@ -114,4 +112,35 @@ input,
 a {
   color: var(--text-color);
   text-decoration: none;
+}
+
+// Fonts emmbeded
+
+@font-face {
+  font-family: ProximaNova;
+  src: url('/assets/fonts/KFOlCnqEu92Fr1MmEU9fChc4EsA.woff2');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: ProximaNova;
+  src: url('/assets/fonts/KFOlCnqEu92Fr1MmEU9fCxc4EsA.woff2');
+  font-weight: 300;
+}
+@font-face {
+  font-family: ProximaNova;
+  src: url('/assets/fonts/KFOmCnqEu92Fr1Mu4mxK.woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: ProximaNova;
+  src: url('/assets/fonts/KFOmCnqEu92Fr1Mu7WxKOzY.woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: ProximaNova;
+  src: url('/assets/fonts/KFOlCnqEu92Fr1MmEU9fBBc4.woff2');
+  font-weight: 500;
 }

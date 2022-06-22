@@ -22,6 +22,8 @@ import {
 } from './DataMenu';
 import ListSideBar from './ListSideBar';
 import styles from './SideBar.module.scss';
+import { useSelector } from 'react-redux';
+import { authSelector } from '~/Redux/selector';
 
 const PLAYLIST = [
   {
@@ -193,57 +195,70 @@ const SideBar = (props) => {
   const [showLibrary, setShowMoreLibrary] = useState(false);
   const [showSubscriptions, setShowSubscriptions] = useState(false);
   const [playlist, setPlaylist] = useState(PLAYLIST);
-  const [channelList, setChannelList] = useState(SUB_CHANNEL);
   const toggleSideBar = useContext(ToggleSideBarContext);
-  const auth = true;
+  const auth = useSelector(authSelector);
 
   //popular
   const popularData = { ...MENU_DATA_POPULAR };
 
-  //library
-  const libraryData = toggleSideBar.value
-    ? {
-        ...MENU_DATA_LIBRARY,
-        values: [...MENU_DATA_LIBRARY.values.slice(0, 2)],
-      }
-    : auth
-    ? showLibrary
-      ? {
-          ...MENU_DATA_LIBRARY,
-          values: [...MENU_DATA_LIBRARY.values.concat(playlist)],
-        }
-      : { ...MENU_DATA_LIBRARY }
-    : {
+  //menu library
+  const libraryData = () => {
+    if (toggleSideBar.value) {
+      return {
         ...MENU_DATA_LIBRARY,
         values: [...MENU_DATA_LIBRARY.values.slice(0, 2)],
       };
+    }
+    if (auth.status === 0) {
+      return {
+        ...MENU_DATA_LIBRARY,
+        values: [...MENU_DATA_LIBRARY.values.slice(0, 2)],
+      };
+    }
+    if (showLibrary) {
+      return {
+        ...MENU_DATA_LIBRARY,
+        values: [...MENU_DATA_LIBRARY.values.concat(playlist)],
+      };
+    }
+    return { ...MENU_DATA_LIBRARY };
+  };
 
-  //subscriptions
-  const subscriptionsData = toggleSideBar.value
-    ? { ...SUB_CHANNEL, values: [] }
-    : auth
-    ? showSubscriptions
-      ? { ...SUB_CHANNEL }
-      : { ...SUB_CHANNEL, values: [...SUB_CHANNEL.values].slice(0, 6) }
-    : { ...SUB_CHANNEL, values: [] };
+  //subscription
+  const subscriptionsData = () => {
+    if (toggleSideBar.value || auth.status === 0) {
+      return { ...SUB_CHANNEL, values: [] };
+    }
+    if (showSubscriptions) {
+      return { ...SUB_CHANNEL };
+    }
+    return { ...SUB_CHANNEL, values: [...SUB_CHANNEL.values].slice(0, 6) };
+  };
 
-  //more from youtube
-  const moreFromYoutubeData = toggleSideBar.value
-    ? { ...MENU_MORE_FROM_YOUTUBE, values: [] }
-    : auth
-    ? { ...MENU_MORE_FROM_YOUTUBE }
-    : {
+  const moreFromYoutubeData = () => {
+    if (toggleSideBar.value) {
+      return { ...MENU_MORE_FROM_YOUTUBE, values: [] };
+    }
+    if (auth.status === 0) {
+      return {
         ...MENU_MORE_FROM_YOUTUBE,
         values: [...MENU_MORE_FROM_YOUTUBE.values].filter((item, index) => {
           return index !== 0 && index !== 2;
         }),
       };
+    }
+    return { ...MENU_MORE_FROM_YOUTUBE };
+  };
 
-  const bestChannelOfYoutubeData = toggleSideBar.value
-    ? { ...MENU_BEST_OF_YOUTUBE, values: [] }
-    : !auth
-    ? { ...MENU_BEST_OF_YOUTUBE }
-    : { ...MENU_BEST_OF_YOUTUBE, values: [] };
+  const bestChannelOfYoutubeData = () => {
+    if (toggleSideBar.value) {
+      return { ...MENU_BEST_OF_YOUTUBE, values: [] };
+    }
+    if (auth.status === 0) {
+      return { ...MENU_BEST_OF_YOUTUBE };
+    }
+    return { ...MENU_BEST_OF_YOUTUBE, values: [] };
+  };
 
   //settings
   const settingsData = { ...MENU_SETTINGS };
@@ -281,10 +296,10 @@ const SideBar = (props) => {
         <ListSideBar data={popularData} />
       )}
 
-      {libraryData && libraryData.values.length > 0 && (
+      {libraryData() && libraryData().values.length > 0 && (
         <>
-          <ListSideBar data={libraryData} />
-          {!toggleSideBar.value && auth && (
+          <ListSideBar data={libraryData()} />
+          {!toggleSideBar.value && auth.status === 1 && (
             <ItemSideBar
               className={cx('show')}
               onClick={handleShowLibrary}
@@ -297,10 +312,10 @@ const SideBar = (props) => {
         </>
       )}
 
-      {subscriptionsData && subscriptionsData.values.length > 0 && (
+      {subscriptionsData() && subscriptionsData().values.length > 0 && (
         <>
-          <ListSideBar data={subscriptionsData} />
-          {auth && (
+          <ListSideBar data={subscriptionsData()} />
+          {auth.status === 1 && (
             <ItemSideBar
               className={cx('show')}
               onClick={handleShowSubscriptions}
@@ -317,7 +332,7 @@ const SideBar = (props) => {
         </>
       )}
 
-      {!auth && !toggleSideBar.value && (
+      {auth.status !== 1 && !toggleSideBar.value && (
         <section className={cx('sign-in')}>
           <p className={cx('title')}>
             Sign in to like videos, comment, and subscribe
@@ -326,16 +341,17 @@ const SideBar = (props) => {
         </section>
       )}
 
-      {moreFromYoutubeData && moreFromYoutubeData.values.length > 0 && (
-        <ListSideBar data={moreFromYoutubeData} />
+      {moreFromYoutubeData() && moreFromYoutubeData().values.length > 0 && (
+        <ListSideBar data={moreFromYoutubeData()} />
       )}
 
-      {bestChannelOfYoutubeData &&
-        bestChannelOfYoutubeData.values.length > 0 && (
-          <ListSideBar data={bestChannelOfYoutubeData} />
+      {bestChannelOfYoutubeData() &&
+        bestChannelOfYoutubeData().values.length > 0 && (
+          <ListSideBar data={bestChannelOfYoutubeData()} />
         )}
 
       {!toggleSideBar.value &&
+        !auth.status === 1 &&
         browseChannels &&
         browseChannels.values.length > 0 && (
           <ListSideBar data={browseChannels} />

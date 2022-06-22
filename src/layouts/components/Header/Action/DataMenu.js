@@ -14,6 +14,13 @@ import {
   LanguageIcon,
   LiveIcon,
   UpVideoIcon,
+  AddAccountIcon,
+  SignOutIcon,
+  StudioIcon,
+  SwitchAccountIcon,
+  YourChannelIcon,
+  PurchasesIcon,
+  HideEyeIcon,
 } from '~/components/Icons/Icons';
 
 export const MENU_APPS = {
@@ -210,6 +217,87 @@ export const MENU_CREATE = {
       target: '_blank',
       leftIcon: <LiveIcon />,
       title: 'Go live',
+    },
+  ],
+};
+
+export const MENU_USER = {
+  type: 'user',
+  id: uuidv4(),
+  values: [
+    {
+      id: uuidv4(),
+      type: 'user',
+      path: '/channel',
+      leftIcon: <YourChannelIcon />,
+      title: 'Your channel',
+    },
+    {
+      id: uuidv4(),
+      type: 'user',
+      path: '/paid_memberships',
+      leftIcon: <PurchasesIcon />,
+      title: 'Purchases and membership',
+    },
+    {
+      id: uuidv4(),
+      type: 'user',
+      path: 'https://studio.youtube.com',
+      target: '_blank',
+      leftIcon: <StudioIcon />,
+      title: 'Youtube Studio',
+    },
+    {
+      id: uuidv4(),
+      type: 'user',
+      leftIcon: <SwitchAccountIcon />,
+      title: 'Switch account',
+      children: {
+        id: uuidv4(),
+        type: 'account',
+        values: [
+          {
+            id: uuidv4(),
+            type: 'account',
+            leftIcon: <AddAccountIcon />,
+            title: 'Add account',
+          },
+          {
+            id: uuidv4(),
+            type: 'account',
+            dataType: 'SignOut',
+            leftIcon: <SignOutIcon />,
+            title: 'Sign Out',
+          },
+        ],
+      },
+    },
+    {
+      id: uuidv4(),
+      type: 'user',
+      dataType: 'SignOut',
+      leftIcon: <SignOutIcon />,
+      title: 'Sign Out',
+    },
+    ...MENU_SETTINGS.values,
+  ],
+};
+
+export const MENU_SETTINGS_NOTIFY = {
+  type: 'settingsNotify',
+  id: uuidv4(),
+  values: [
+    {
+      id: uuidv4(),
+      type: 'settingsNotify',
+      leftIcon: <HideEyeIcon />,
+      title: 'Hide this notification',
+    },
+
+    {
+      id: uuidv4(),
+      type: 'settingsNotify',
+      title: 'Turn off all from LPL Vietnam Official - Kênh chính thức',
     },
   ],
 };

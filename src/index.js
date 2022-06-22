@@ -3,13 +3,17 @@ import ReactDOM from 'react-dom/client';
 import GlobalStyle from '~/components/GlobalStyle';
 import App from './App';
 import ToggleSideBarProvider from '~/context/ToggleSideBarProvider';
+import { Provider } from 'react-redux';
+import store from '~/Redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <GlobalStyle>
-    <ToggleSideBarProvider>
-      <App />
-    </ToggleSideBarProvider>
+    <Provider store={store}>
+      <ToggleSideBarProvider>
+        <App />
+      </ToggleSideBarProvider>
+    </Provider>
   </GlobalStyle>,
 );
 

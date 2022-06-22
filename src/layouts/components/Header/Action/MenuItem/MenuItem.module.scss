@@ -44,6 +44,24 @@
     }
   }
 
+  &.user:nth-child(2) {
+    margin-top: $padding-min;
+  }
+  &.user:nth-child(6) {
+    position: relative;
+    margin-bottom: $padding-max;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 1px;
+      background-color: $color-border;
+      transform: translateY($padding-max/2);
+    }
+  }
+
   .btn {
     @include btn-icon;
     background-color: transparent;
@@ -52,7 +70,11 @@
   .title {
     flex: 1;
     font-size: 1.4rem;
-    font-weight: 400;
+    font-weight: 300;
     color: $color-text-secondary;
+
+    &.settingsNotify {
+      font-size: 14px;
+    }
   }
 }
