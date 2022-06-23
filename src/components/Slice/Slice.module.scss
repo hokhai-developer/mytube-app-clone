@@ -1,0 +1,55 @@
+@import '../../components/GlobalStyle/GlobalStyle.module.scss';
+
+.wrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding: $padding-medium $padding-min;
+
+  &:hover .btn {
+    opacity: 1;
+  }
+
+  .btn {
+    position: absolute;
+    cursor: pointer;
+    width: 32px;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $color-secondary;
+    background-color: $color-background-btn;
+    border-radius: 50%;
+    z-index: 2;
+    opacity: 0.8;
+    &:hover {
+      background-color: $color-background-btn-hover;
+    }
+    &:active {
+      background-color: $color-background-focus;
+    }
+
+    &.btn-prev {
+      left: 0;
+      top: 0;
+      transform: translate((50%, 30%));
+    }
+    &.btn-next {
+      right: 0;
+      top: 0;
+      transform: translate((-50%, 30%));
+    }
+  }
+
+  .container {
+    width: unset;
+    display: flex;
+    align-items: center;
+    // flex-wrap: nowrap;
+    gap: 0 10px;
+    width: max-content;
+    transition: all 0.1s linear;
+  }
+}

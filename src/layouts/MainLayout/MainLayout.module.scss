@@ -18,10 +18,12 @@
     display: flex;
     height: calc(100vh - $header-height);
     overflow: hidden;
+    padding: 0 $padding-max;
     // margin-right: -(calc($padding-max - 6px));
     .content {
       flex: 1;
-      overflow: overlay;
+      overflow: hidden;
+      height: calc(100vh - $header-height);
     }
   }
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from './Categories.module.scss';
+import Slice from '../../../components/Slice/Slice';
 
 const chips = [
   'All',
@@ -11,7 +12,7 @@ const chips = [
   'Gaming',
   'Music',
   'Live',
-  'League of Legends Champions Ship',
+  'League of Legends Champ Ship',
   'Monkey D.Luffy',
   'Fish',
   'Humans',
@@ -19,7 +20,7 @@ const chips = [
   'Super hero movies',
   'Electronic music',
   'Comedy',
-  'League of Legends Champions Ship',
+  'League of Champions Ship',
   'Monkey D.Luffy',
   'Fish',
   'Humans',
@@ -36,20 +37,22 @@ const Categories = (props) => {
     setActive(index);
   };
   return (
-    <div className={cx('top-chips')}>
-      {chips.map((chip, index) => {
-        return (
-          <span
-            className={cx('chip', {
-              active: active === index,
-            })}
-            key={index}
-            onClick={() => handleClick(index)}
-          >
-            {chip}
-          </span>
-        );
-      })}
+    <div className={cx('wrapper')}>
+      <Slice translateX={120}>
+        {chips.map((chip, index) => {
+          return (
+            <span
+              className={cx('chip', {
+                active: active === index,
+              })}
+              key={index}
+              onClick={() => handleClick(index)}
+            >
+              {chip}
+            </span>
+          );
+        })}
+      </Slice>
     </div>
   );
 };

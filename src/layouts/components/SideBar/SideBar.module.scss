@@ -1,6 +1,5 @@
 @import '../../../components/GlobalStyle//GlobalStyle.module.scss';
 .wrapper {
-  padding-left: $padding-max;
   padding-bottom: $padding-max;
   padding-right: $padding-min;
   display: flex;
@@ -13,9 +12,9 @@
   &.toggleSideBar {
     max-width: 72px;
     padding: 0;
-    // padding-left: $padding-max;
     overflow: hidden;
   }
+
   //sign in
   .sign-in {
     padding: $padding-min 0 $padding-medium;

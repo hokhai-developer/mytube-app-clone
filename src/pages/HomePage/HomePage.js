@@ -9,7 +9,9 @@ const cx = classNames.bind(styles);
 const HomePage = (props) => {
   return (
     <div className={cx('wrapper')}>
-      <Categories />
+      <div className={cx('category')}>
+        <Categories />
+      </div>
       <div className={cx('wrapper-list')}>
         <HomeVideoItem />
         <HomeVideoItem />

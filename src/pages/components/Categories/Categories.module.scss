@@ -1,43 +1,30 @@
 @import '../../../components/GlobalStyle/GlobalStyle.module.scss';
 
-.top-chips {
-  display: flex;
-  align-items: center;
-  overflow-x: overlay;
-  padding: $padding-max;
-  gap: 0 $gap-medium;
-  scrollbar-width: none;
+.wrapper {
+  border-bottom: 1px solid $color-border;
+  border-top: 1px solid $color-border;
+  background-color: $color-white;
+  width: 100%;
+  z-index: 2;
 
-  &::-webkit-scrollbar {
-    height: $gap-medium;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: transparent;
-  }
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-  &:hover:-webkit-scrollbar-thumb {
-    background-color: red;
-  }
-}
-.chip {
-  cursor: pointer;
-  max-width: 224px;
-  display: block;
-  font-size: 16px;
-  font-weight: 300;
-  border: 1px solid $color-border;
-  padding: 2px $padding-medium;
-  border-radius: 9999em;
-  @include text-clamp(1);
-  flex-shrink: 0;
-  background-color: $color-background-btn;
-  &.active {
-    background-color: $color-black;
-    color: $color-white;
-  }
-  &:hover {
-    background-color: $color-background-btn-hover;
+  .chip {
+    cursor: pointer;
+    max-width: 224px;
+    display: block;
+    font-size: 16px;
+    font-weight: 300;
+    border: 1px solid $color-border;
+    padding: 2px $padding-medium;
+    border-radius: 9999em;
+    @include text-clamp(1);
+    flex-shrink: 0;
+    background-color: $color-background-btn;
+    &.active {
+      background-color: $color-black;
+      color: $color-white;
+    }
+    &:hover {
+      background-color: $color-background-btn-hover;
+    }
   }
 }
