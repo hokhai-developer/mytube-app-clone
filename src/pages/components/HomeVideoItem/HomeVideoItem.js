@@ -5,6 +5,10 @@ import styles from './HomeVideoItem.module.scss';
 import Image from '~/components/Image';
 import { v4 as uuidv4 } from 'uuid';
 import Menu from '~/components/Menu';
+import numeral from 'numeral';
+import moment from 'moment';
+import { getChannel } from '~/services/channel';
+
 import {
   SettingsIcon,
   VerifiedIcon,
@@ -16,8 +20,9 @@ import {
   DoNotRecommendIcon,
   ReportIcon,
 } from '~/components/Icons/Icons';
-import { authSelector } from '~/Redux/selector';
+import { authSelector } from '~/redux/selector';
 import { useSelector } from 'react-redux';
+import Images from '~/assets/Images';
 
 const MENU_SETTINGS_VIDEO_ITEM = {
   type: 'settingsVideoItem',
@@ -70,10 +75,51 @@ const MENU_SETTINGS_VIDEO_ITEM = {
 };
 
 const cx = classNames.bind(styles);
-
-const HomeVideoItem = (props) => {
+const HomeVideoItem = ({
+  id,
+  channelId,
+  channelTitle,
+  publishedAt,
+  title,
+  photoURL,
+  duration,
+  viewCount,
+}) => {
   const [showSettings, setShowSettings] = useState(false);
+  const [channel, setChannel] = useState();
   const auth = useSelector(authSelector);
+  const seconds = moment.duration(duration).asSeconds();
+  const _duration = moment.utc(seconds * 1000).format('mm:ss');
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      const response = await getChannel({
+        part: 'snippet',
+        id: channelId,
+        key: 'AIzaSyDLsgf7_AP9fUex_OifIqQ4hnwR5fqLHvA',
+      });
+      if (response && response.items) {
+        const _channel = {
+          channelId: response.items[0].id || channelId,
+          photoURL: {
+            high: response.items[0].snippet.thumbnails.high.url,
+            medium: response.items[0].snippet.thumbnails.medium.url,
+            default: response.items[0].snippet.thumbnails.default.url,
+          },
+        };
+        setChannel({
+          ..._channel,
+        });
+      } else {
+        setChannel({
+          channelId: channelId,
+          photoURL: {},
+        });
+      }
+    };
+    fetchApi();
+  }, [channelId]);
+
   const menuSettingItemVideoHasAuth = { ...MENU_SETTINGS_VIDEO_ITEM };
   const menuSettingItemVideoNotAuth = {
     ...MENU_SETTINGS_VIDEO_ITEM,
@@ -81,30 +127,41 @@ const HomeVideoItem = (props) => {
       return index === 0 || index === 3;
     }),
   };
-
   return (
     <div className={cx('wrapper')}>
       <div className={cx('item-top')}>
-        <Image src="" al="" />
-        <span className={cx('time')}>25:25</span>
+        <Image
+          src={photoURL.high || photoURL.medium || photoURL.default}
+          al={title}
+          title={title}
+        />
+        <span className={cx('time')}>{_duration}</span>
       </div>
       <div className={cx('item-bottom')}>
         <div className={cx('channel-avatar')}>
-          <Image src="" alt="" />
-          <span></span>
+          {channel && (
+            <Image
+              src={
+                channel.photoURL.high ||
+                channel.photoURL.medium ||
+                channel.photoURL.default ||
+                Images.noImage
+              }
+              alt={channelTitle}
+            />
+          )}
         </div>
         <div className={cx('item-mid')}>
-          <h5 className={cx('title-video')}>
-            Chiến hạm Mỹ chạm trán xồng cao tốc vệ binh Cách mạng Iran, lên án
-            hoạt động thiếu an toàn
-          </h5>
+          <h5 className={cx('title-video')}>{title}</h5>
           <div className={cx('channel')}>
-            <p className={cx('channel-name')}>Báo Thanh Niên</p>
-            <div className={cx('verified')}>
+            <p className={cx('channel-name')}>{channelTitle}</p>
+            {/* <div className={cx('verified')}>
               <VerifiedIcon />
-            </div>
+            </div> */}
           </div>
-          <div className={cx('view-time')}>10k views • 1hour ago</div>
+          <div className={cx('view-time')}>
+            {numeral(viewCount).format('0.a')} • {moment(publishedAt).fromNow()}
+          </div>
         </div>
 
         {/* tippy loi khi lan dau SignIn/signOut => khong thay doi menu duoc*/}
@@ -142,7 +199,7 @@ const HomeVideoItem = (props) => {
                 setShowSettings(!showSettings);
               }}
             >
-              <SettingsIcon />
+              <SettingsIcon className={cx('icon')} />
             </button>
           </Menu>
         )}

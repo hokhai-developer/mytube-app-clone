@@ -44,10 +44,9 @@
   }
 
   .container {
-    width: unset;
     display: flex;
     align-items: center;
-    // flex-wrap: nowrap;
+    flex-wrap: nowrap;
     gap: 0 10px;
     width: max-content;
     transition: all 0.1s linear;

@@ -15,7 +15,7 @@ import ButtonSignIn from '~/layouts/components/ButtonSignIn';
 import Menu from '~/components/Menu';
 import Notifications from '~/layouts/components/Notifications';
 import { MENU_APPS, MENU_SETTINGS, MENU_CREATE, MENU_USER } from './DataMenu';
-import { authSelector } from '~/Redux/selector';
+import { authSelector } from '~/redux/selector';
 import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);

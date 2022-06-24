@@ -3,9 +3,12 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+
   .category {
+    overflow: hidden;
     position: sticky;
     top: 0;
+    width: 100%;
     z-index: 2;
   }
 

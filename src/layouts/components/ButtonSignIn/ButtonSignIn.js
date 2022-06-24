@@ -5,7 +5,7 @@ import styles from './ButtonSignIn.module.scss';
 import { UserIcon } from '~/components/Icons';
 import { signInWithGoogle } from '~/firebase/signIn';
 import { useDispatch } from 'react-redux';
-import authSlice from '../../../Redux/authSlice';
+import authSlice from '~/redux/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);

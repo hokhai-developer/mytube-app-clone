@@ -8,11 +8,11 @@ import { BackIcon } from '~/components/Icons/Icons';
 import Image from '~/components/Image';
 import Images from '~/assets/Images';
 import { useDispatch } from 'react-redux';
-import authSlice from '~/Redux/authSlice';
+import authSlice from '~/redux/authSlice';
 import { signOutAuth } from '~/firebase/signOut';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { authSelector } from '~/Redux/selector';
+import { authSelector } from '~/redux/selector';
 
 const cx = classNames.bind(styles);
 const Menu = ({

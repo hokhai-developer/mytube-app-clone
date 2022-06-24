@@ -8,8 +8,8 @@ import React, { useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Auth } from '~/firebase/firebaseConfig';
 import { useDispatch, useSelector } from 'react-redux';
-import authSlice from '~/Redux/authSlice';
-import { authSelector } from '~/Redux/selector';
+import authSlice from '~/redux/authSlice';
+import { authSelector } from '~/redux/selector';
 
 function App() {
   const dispatch = useDispatch();

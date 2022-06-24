@@ -5,7 +5,6 @@
   border-top: 1px solid $color-border;
   background-color: $color-white;
   width: 100%;
-  z-index: 2;
 
   .chip {
     cursor: pointer;
@@ -26,5 +25,9 @@
     &:hover {
       background-color: $color-background-btn-hover;
     }
+  }
+
+  .loading {
+    text-align: center;
   }
 }

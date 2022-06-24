@@ -26,9 +26,11 @@
       font-size: 10px;
     }
   }
+
   .item-bottom {
     display: flex;
     align-items: flex-start;
+    justify-content: flex-start;
 
     .channel-avatar {
       width: 36px;
@@ -50,6 +52,7 @@
         font-weight: 400;
         @include text-clamp(2);
         cursor: pointer;
+        max-width: 165px;
       }
 
       .channel {
@@ -78,16 +81,21 @@
         color: $color-text-secondary;
       }
     }
+  }
 
-    .icon-settings {
-      cursor: pointer;
-      width: 40px;
-      aspect-ratio: 1/1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      @include btn-icon;
-      background-color: transparent;
-    }
+  .icon-settings {
+    @include btn-icon;
+    cursor: pointer;
+    width: 40px;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    opacity: 0;
+  }
+
+  &:hover .icon-settings {
+    opacity: 1;
   }
 }

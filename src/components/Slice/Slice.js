@@ -24,7 +24,6 @@ const Slice = ({ children, translateX = 200 }) => {
     const container = containerRef.current;
     const wrapperWidth = wrapperRef.current;
     let translate = -translateX * (currentIndex + 1);
-
     if (currentIndex + 1 === ratio) {
       translate = -(container.offsetWidth - wrapperWidth.offsetWidth + 16);
       container.style.transform = `translateX(${translate}px)`;

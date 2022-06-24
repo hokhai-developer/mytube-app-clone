@@ -23,7 +23,7 @@ import {
 import ListSideBar from '../ListSideBar';
 import styles from './SideBar.module.scss';
 import { useSelector } from 'react-redux';
-import { authSelector } from '~/Redux/selector';
+import { authSelector } from '~/redux/selector';
 
 const PLAYLIST = [
   {
