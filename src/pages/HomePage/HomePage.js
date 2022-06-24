@@ -16,76 +16,18 @@ const cx = classNames.bind(styles);
 const HomePage = (props) => {
   const [videosList, setVideoList] = useState([]);
   const [nextPageToken, setNextPageToken] = useState('');
-  const [categoryId, setCategoryId] = useState({});
 
-  const dispatch = useDispatch();
-  const category = useSelector(categorySelector);
   const homeVideos = useSelector(homeSelector);
-  const prevCategoryId = useRef();
+  const category = useSelector(categorySelector);
 
-  useEffect(() => {
-    prevCategoryId.current = categoryId;
-    const videoCategoryId = category.currentActive.categoryID;
-    if (!videoCategoryId) {
-      return;
-    }
-    setCategoryId(category.currentActive); //luu lai videoCategoryId prev, xu ly khi error get video
+  // useEffect(() => {
+  //   const currentCategoryActive = category.currentActive.categoryID;
+  //   let item = homeVideos.map((video) => {
+  //     return video.videoCategoryId === currentCategoryActive;
+  //   });
 
-    let index = homeVideos?.findIndex((homeVideo) => {
-      return homeVideo.videoCategoryId === videoCategoryId;
-    });
-
-    if (index !== -1) {
-      setVideoList(homeVideos[index].listVideos);
-    } else {
-      fetchApi(videoCategoryId);
-    }
-  }, [category.currentActive.categoryID]);
-
-  async function fetchApi(id) {
-    const results = await getVideos({
-      part: 'snippet,contentDetails,statistics',
-      key: 'AIzaSyDLsgf7_AP9fUex_OifIqQ4hnwR5fqLHvA',
-      chart: 'mostPopular',
-      regionCode: 'VN',
-      maxResults: 8,
-      videoCategoryId: id,
-      // nextPageToken: _nextPageToken,
-    });
-    if (results && results.items) {
-      // _nextPageToken = results.nextPageToken;
-      const listVideo = results.items.map((item) => {
-        return {
-          id: item.id,
-          channelId: item.snippet.channelId,
-          channelTitle: item.snippet.channelTitle,
-          publishedAt: item.snippet.publishedAt,
-          title: item.snippet.title,
-          photoURL: {
-            default: item.snippet.thumbnails.default.url,
-            medium: item.snippet.thumbnails.medium.url,
-            high: item.snippet.thumbnails.high.url,
-          },
-          viewCount: item.statistics.viewCount,
-          duration: item.contentDetails.duration,
-        };
-      });
-
-      dispatch(
-        homeSlice.actions.newVideos({
-          status: 1,
-          videoCategoryId: id,
-          // nextPageToken: results.nextPageToken,
-          listVideos: listVideo,
-        }),
-      );
-      setVideoList(listVideo);
-    } else {
-      //getVideo error
-      dispatch(categorySlice.actions.active(prevCategoryId.current));
-      setVideoList([]);
-    }
-  }
+  //   setVideoList(item);
+  // }, category.currentActive?.categoryID);
 
   return (
     <div className={cx('wrapper')}>

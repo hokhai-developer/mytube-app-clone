@@ -13,12 +13,11 @@ const homeSlice = createSlice({
         (item) => item.videoCategoryId === videoCategoryId,
       );
 
-      if (index === -1) {
-        state.push(actions.payload);
+      if (index !== -1) {
         return state;
       }
 
-      state[index].listVideos.push(listVideos);
+      state.push(actions.payload);
       return state;
     },
     addMoreVideos: (state, actions) => {

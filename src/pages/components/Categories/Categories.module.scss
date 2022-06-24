@@ -18,9 +18,12 @@
     @include text-clamp(1);
     flex-shrink: 0;
     background-color: $color-background-btn;
+    user-select: none;
     &.active {
       background-color: $color-black;
       color: $color-white;
+      cursor: none;
+      pointer-events: none;
     }
     &:hover {
       background-color: $color-background-btn-hover;

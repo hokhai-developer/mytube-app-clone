@@ -2,22 +2,33 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from './Categories.module.scss';
-import Slice from '~/components/Slice/Slice';
+import Slice from '~/components/Slice';
 import { useSelector, useDispatch } from 'react-redux';
-import { categorySelector } from '~/redux/selector';
+import { categorySelector, homeSelector } from '~/redux/selector';
 import { getCategoryList } from '~/services/categoryList';
 import categorySlice from '~/redux/categorySlice';
+import { getVideos } from '~/services/videos';
+import homeSlice from '~/redux/homeSlice';
 
 const cx = classNames.bind(styles);
 const Categories = (props) => {
-  const [categoryList, setCategorySelector] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
   const [active, setActive] = useState(undefined);
 
   const dispatch = useDispatch();
   const category = useSelector(categorySelector);
+  const homeVideos = useSelector(homeSelector);
 
+  console.log(homeVideos);
   useEffect(() => {
-    const fetchApi = async () => {
+    if (category.status === 1) {
+      setCategoryList(category.list);
+      setActive(category.currentActive.categoryID);
+      return;
+    }
+
+    //fetch categories
+    const fetchCategoryApi = async () => {
       const results = await getCategoryList();
       if (results && results.items) {
         const list = results.items.map((item) => {
@@ -26,7 +37,6 @@ const Categories = (props) => {
             title: item.snippet.title,
           };
         });
-
         dispatch(
           categorySlice.actions.setList({
             status: 1,
@@ -34,8 +44,9 @@ const Categories = (props) => {
             currentActive: { ...list[0] },
           }),
         );
-        setCategorySelector(() => list);
+        setCategoryList(() => list);
         setActive(list[0].categoryID);
+        fetchVideosApi(list[0]);
       } else {
         dispatch(
           categorySlice.actions.setList({
@@ -46,13 +57,71 @@ const Categories = (props) => {
         );
       }
     };
-
-    fetchApi();
+    fetchCategoryApi();
   }, []);
 
+  //fetch Videos
+  async function fetchVideosApi(options) {
+    const results = await getVideos({
+      part: 'snippet,contentDetails,statistics',
+      key: 'AIzaSyDLsgf7_AP9fUex_OifIqQ4hnwR5fqLHvA',
+      chart: 'mostPopular',
+      regionCode: 'VN',
+      maxResults: 24,
+      videoCategoryId: options.categoryID,
+      // nextPageToken: _nextPageToken,
+    });
+    if (results && results.items) {
+      // _nextPageToken = results.nextPageToken;
+      const listVideo = results.items.map((item) => {
+        return {
+          id: item.id,
+          channelId: item.snippet.channelId,
+          channelTitle: item.snippet.channelTitle,
+          publishedAt: item.snippet.publishedAt,
+          title: item.snippet.title,
+          photoURL: {
+            default: item.snippet.thumbnails.default.url,
+            medium: item.snippet.thumbnails.medium.url,
+            high: item.snippet.thumbnails.high.url,
+          },
+          viewCount: item.statistics.viewCount,
+          duration: item.contentDetails.duration,
+        };
+      });
+
+      dispatch(
+        homeSlice.actions.newVideos({
+          status: 1,
+          videoCategoryId: options.categoryID,
+          // nextPageToken: results.nextPageToken,
+          listVideos: listVideo,
+        }),
+      );
+      setActive(options.categoryID);
+      dispatch(categorySlice.actions.active(options));
+    } else {
+      //show error
+      return;
+    }
+  }
+
   const handleClick = (item) => {
-    setActive(item.categoryID);
-    dispatch(categorySlice.actions.active({ ...item }));
+    if (item.categoryID === active) {
+      return;
+    }
+    let index = homeVideos.map((video) => {
+      return homeVideos.videoCategoryId === item.categoryID;
+    });
+
+    if (index === -1) {
+      return;
+    } else {
+      fetchVideosApi(item);
+    }
+
+    // setActive(item.categoryID);
+    // dispatch(categorySlice.actions.active({ ...item }));
   };
 
   return (
