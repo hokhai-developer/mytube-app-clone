@@ -19,7 +19,6 @@ const Categories = (props) => {
   const category = useSelector(categorySelector);
   const homeVideos = useSelector(homeSelector);
 
-  console.log(homeVideos);
   useEffect(() => {
     if (category.status === 1) {
       setCategoryList(category.list);
@@ -60,19 +59,16 @@ const Categories = (props) => {
     fetchCategoryApi();
   }, []);
 
-  //fetch Videos
   async function fetchVideosApi(options) {
     const results = await getVideos({
       part: 'snippet,contentDetails,statistics',
       key: 'AIzaSyDLsgf7_AP9fUex_OifIqQ4hnwR5fqLHvA',
       chart: 'mostPopular',
       regionCode: 'VN',
-      maxResults: 24,
+      maxResults: 12,
       videoCategoryId: options.categoryID,
-      // nextPageToken: _nextPageToken,
     });
     if (results && results.items) {
-      // _nextPageToken = results.nextPageToken;
       const listVideo = results.items.map((item) => {
         return {
           id: item.id,
@@ -94,7 +90,7 @@ const Categories = (props) => {
         homeSlice.actions.newVideos({
           status: 1,
           videoCategoryId: options.categoryID,
-          // nextPageToken: results.nextPageToken,
+          nextPageToken: results.nextPageToken,
           listVideos: listVideo,
         }),
       );

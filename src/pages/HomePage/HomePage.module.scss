@@ -11,15 +11,23 @@
     width: 100%;
     z-index: 2;
   }
-
   .wrapper-list {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    height: calc(100vh - $header-height - 54px);
     padding: $padding-medium $padding-max;
     background-color: $color-background;
     overflow: overlay;
+    height: calc(100vh - $header-height - 54px);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow: auto;
+    flex: 1;
+
+    .scroll-infinity {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      overflow: overlay;
+    }
   }
 }

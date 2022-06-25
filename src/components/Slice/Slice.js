@@ -6,7 +6,7 @@ import { PreviousIcon, NextIcon } from '~/components/Icons';
 import useWindowResize from '~/hooks/useWindowResize';
 
 const cx = classNames.bind(styles);
-const Slice = ({ children, translateX = 200 }) => {
+const Slice = ({ children, translateX = 400 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [ratio, setRatio] = useState(undefined);
   const windowResize = useWindowResize();
@@ -18,14 +18,15 @@ const Slice = ({ children, translateX = 200 }) => {
     const containerWidth = containerRef.current.offsetWidth;
     const wrapperWidth = wrapperRef.current.offsetWidth;
     setRatio(Math.ceil((containerWidth - wrapperWidth) / translateX));
-  }, [windowResize.windowWidth]);
+  }, [windowResize.windowWidth, containerRef.current?.offsetWidth]);
 
   const handleNext = () => {
     const container = containerRef.current;
-    const wrapperWidth = wrapperRef.current;
+    const wrapper = wrapperRef.current;
+    console.log(ratio, container.offsetWidth);
     let translate = -translateX * (currentIndex + 1);
     if (currentIndex + 1 === ratio) {
-      translate = -(container.offsetWidth - wrapperWidth.offsetWidth + 16);
+      translate = -(container.offsetWidth - wrapper.offsetWidth + 16);
       container.style.transform = `translateX(${translate}px)`;
     } else {
       container.style.transform = `translateX(${translate}px)`;

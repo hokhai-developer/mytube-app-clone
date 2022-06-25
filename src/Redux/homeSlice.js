@@ -6,26 +6,34 @@ const homeSlice = createSlice({
   reducers: {
     newVideos: (state, actions) => {
       const { status, videoCategoryId, listVideos } = actions.payload;
-
+      //fecth that bai
       if (status === 0) return state;
 
       let index = state.findIndex(
         (item) => item.videoCategoryId === videoCategoryId,
       );
 
+      //co videos
       if (index !== -1) {
         return state;
       }
 
+      //khong co video
       state.push(actions.payload);
       return state;
     },
     addMoreVideos: (state, actions) => {
-      //loading infinity
-      state.status = 1;
-      state.values.videos.concat(actions.payload.videos);
-      state.values.nextPageToken = actions.payload.nextPageToken;
+      let index = state.findIndex(
+        (item) => item.videoCategoryId === actions.payload.videoCategoryId,
+      );
+      state[index].nextPageToken = actions.payload.nextPageToken;
+      state[index].listVideos.push(...actions.payload.listVideos);
       return state;
+      //loading infinity
+      // state.status = 1;
+      // state.values.videos.push(actions.payload.videos);
+      // state.values.nextPageToken = actions.payload.nextPageToken;
+      // return state;
     },
   },
 });
