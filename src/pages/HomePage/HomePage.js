@@ -15,33 +15,36 @@ const cx = classNames.bind(styles);
 
 const HomePage = (props) => {
   const [videosList, setVideoList] = useState({});
+  const topRef = useRef();
   const homeVideos = useSelector(homeSelector);
   const category = useSelector(categorySelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const currentCategoryActive = category.currentActive.categoryID;
+
+    if (!currentCategoryActive) return;
+    if (!homeVideos.length) return;
+
     let index = homeVideos.findIndex((video) => {
       return video.videoCategoryId === currentCategoryActive;
     });
-
     if (index === -1) {
       setVideoList({});
       return;
     }
+
     setVideoList(homeVideos[index]);
-  }, [category.currentActive.categoryID]);
+  }, [category.currentActive.categoryID, homeVideos.length]);
 
   const fetchMoreVideos = async () => {
     const videoCategoryId = videosList.videoCategoryId;
     const nextPageToken = videosList.nextPageToken;
+    if (!nextPageToken) {
+      return;
+    }
 
     const results = await getVideos({
-      part: 'snippet,contentDetails,statistics',
-      key: 'AIzaSyDLsgf7_AP9fUex_OifIqQ4hnwR5fqLHvA',
-      chart: 'mostPopular',
-      regionCode: 'VN',
-      maxResults: 12,
       videoCategoryId: videoCategoryId,
       pageToken: nextPageToken,
     });
@@ -80,19 +83,27 @@ const HomePage = (props) => {
     }
   };
 
+  //scrollIntoView to the top page
+  const handleScrollIntoView = () => {
+    topRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
   return (
     <div className={cx('wrapper')}>
       <div className={cx('category')}>
-        <Categories />
+        <Categories scrollIntoView={handleScrollIntoView} />
+
         {videosList &&
           videosList.listVideos &&
           videosList.listVideos.length > 0 && (
-            <div className={cx('wrapper-list')}>
+            <div className={cx('wrapper-body')}>
+              <div ref={topRef}></div>
               <ScrollInfinity
                 nextFunctions={fetchMoreVideos}
                 maxLength={videosList.listVideos.length}
                 className={cx('scroll-infinity')}
-                stop={videosList.listVideos.length > 100}
+                stop={
+                  videosList.listVideos.length > 59 || !videosList.nextPageToken
+                }
               >
                 {videosList.listVideos.map((video) => {
                   return (

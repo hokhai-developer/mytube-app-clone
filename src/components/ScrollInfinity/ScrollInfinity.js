@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from './ScrollInfinity.module.scss';
@@ -19,7 +19,6 @@ const ScrollInfinity = ({
 }) => {
   const [addMore, setAddMore] = useState(false);
   const pageEnd = useRef();
-  const scrollRef = useRef();
   const category = useSelector(categorySelector);
 
   useEffect(() => {
@@ -27,10 +26,6 @@ const ScrollInfinity = ({
       nextFunctions();
     }
   }, [addMore]);
-
-  useEffect(() => {
-    scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, [category.currentActive.categoryID]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -49,9 +44,7 @@ const ScrollInfinity = ({
 
   return (
     <div className={cx('wrapper')}>
-      <div className={cx(className)} ref={scrollRef}>
-        {children}
-      </div>
+      <div className={cx(className)}>{children}</div>
       <div ref={pageEnd}></div>
       {addMore && !stop && <div>{loading ? loading : ' ....loading'}</div>}
       {stop && <div>{endPage ? endPage : 'page end..........'}</div>}

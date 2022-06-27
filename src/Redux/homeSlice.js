@@ -29,11 +29,6 @@ const homeSlice = createSlice({
       state[index].nextPageToken = actions.payload.nextPageToken;
       state[index].listVideos.push(...actions.payload.listVideos);
       return state;
-      //loading infinity
-      // state.status = 1;
-      // state.values.videos.push(actions.payload.videos);
-      // state.values.nextPageToken = actions.payload.nextPageToken;
-      // return state;
     },
   },
 });

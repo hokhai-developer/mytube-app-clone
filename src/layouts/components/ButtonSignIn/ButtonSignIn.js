@@ -17,6 +17,7 @@ const ButtonSignIn = ({ className }) => {
     const result = await signInWithGoogle();
     if (result) {
       const { accessToken, displayName, email, photoURL, uid } = result;
+      console.log({ accessToken, displayName, email, photoURL, uid });
       dispatch(
         authSlice.actions.signInAuth({
           accessToken,
@@ -27,10 +28,10 @@ const ButtonSignIn = ({ className }) => {
         }),
       );
       //show toast message thanh cong
-      navigate(-1);
+      navigate('/');
     } else {
       //show toast message that bai
-      navigate(-1);
+      navigate('/');
     }
   };
 

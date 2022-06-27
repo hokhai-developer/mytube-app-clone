@@ -11,7 +11,7 @@ import { getVideos } from '~/services/videos';
 import homeSlice from '~/redux/homeSlice';
 
 const cx = classNames.bind(styles);
-const Categories = (props) => {
+const Categories = ({ scrollIntoView }) => {
   const [categoryList, setCategoryList] = useState([]);
   const [active, setActive] = useState(undefined);
 
@@ -61,13 +61,9 @@ const Categories = (props) => {
 
   async function fetchVideosApi(options) {
     const results = await getVideos({
-      part: 'snippet,contentDetails,statistics',
-      key: 'AIzaSyDLsgf7_AP9fUex_OifIqQ4hnwR5fqLHvA',
-      chart: 'mostPopular',
-      regionCode: 'VN',
-      maxResults: 12,
       videoCategoryId: options.categoryID,
     });
+
     if (results && results.items) {
       const listVideo = results.items.map((item) => {
         return {
@@ -96,14 +92,16 @@ const Categories = (props) => {
       );
       setActive(options.categoryID);
       dispatch(categorySlice.actions.active(options));
-    } else {
-      //show error
-      return;
+    } else if (results === 400) {
+      console.log('get video by search');
+      //get search
     }
   }
 
   const handleClick = (item) => {
+    scrollIntoView();
     if (item.categoryID === active) {
+      //scrollIntoView
       return;
     }
     let index = homeVideos.map((video) => {
@@ -115,9 +113,6 @@ const Categories = (props) => {
     } else {
       fetchVideosApi(item);
     }
-
-    // setActive(item.categoryID);
-    // dispatch(categorySlice.actions.active({ ...item }));
   };
 
   return (

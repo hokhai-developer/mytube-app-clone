@@ -11,16 +11,16 @@
     width: 100%;
     z-index: 2;
   }
-  .wrapper-list {
+  .wrapper-body {
     padding: $padding-medium $padding-max;
     background-color: $color-background;
-    overflow: overlay;
-    height: calc(100vh - $header-height - 54px);
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    overflow: auto;
+    flex-direction: column;
     flex: 1;
+    height: calc(100vh - $header-height - 54px);
+    overflow: overlay;
 
     .scroll-infinity {
       display: flex;

@@ -93,11 +93,7 @@ const HomeVideoItem = ({
 
   useEffect(() => {
     const fetchApi = async () => {
-      const response = await getChannel({
-        part: 'snippet',
-        id: channelId,
-        key: 'AIzaSyDLsgf7_AP9fUex_OifIqQ4hnwR5fqLHvA',
-      });
+      const response = await getChannel(channelId);
       if (response && response.items) {
         const _channel = {
           channelId: response.items[0].id || channelId,

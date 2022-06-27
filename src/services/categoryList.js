@@ -5,12 +5,12 @@ export const getCategoryList = async () => {
     const response = await httpsRequest.get('videoCategories', {
       params: {
         part: 'snippet',
-        key: 'AIzaSyDLsgf7_AP9fUex_OifIqQ4hnwR5fqLHvA',
+        key: 'AIzaSyD_5uon3aJwTEEXBcqVXsuuCqXRnytPUA4',
         regionCode: 'VN',
       },
     });
     return response.data;
   } catch (error) {
-    alert(error);
+    if (error.response.status) return error.response.status;
   }
 };

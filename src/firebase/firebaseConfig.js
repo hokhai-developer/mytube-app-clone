@@ -2,13 +2,13 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAWMecHo3nk7CR5q1IUBP_WEMs9rrQ81Og',
-  authDomain: 'mytube-app-clone.firebaseapp.com',
-  projectId: 'mytube-app-clone',
-  storageBucket: 'mytube-app-clone.appspot.com',
-  messagingSenderId: '288816429225',
-  appId: '1:288816429225:web:0d50725f01798f2bb3d1b8',
-  measurementId: 'G-8H9FG7MDSH',
+  apiKey: 'AIzaSyBAyDxfET8xKWPNP56UGuzMXvPNVbvqea0',
+  authDomain: 'mytube-clone-ui.firebaseapp.com',
+  projectId: 'mytube-clone-ui',
+  storageBucket: 'mytube-clone-ui.appspot.com',
+  messagingSenderId: '693732605924',
+  appId: '1:693732605924:web:ade66b8f6281c3f40391f1',
+  measurementId: 'G-CJS6BB0XL8',
 };
 const app = initializeApp(firebaseConfig);
 export const Auth = getAuth(app);

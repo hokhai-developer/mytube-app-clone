@@ -1,12 +1,16 @@
 import httpsRequest from '~/utils/httpsRequest';
 
-export const getChannel = async (options) => {
+export const getChannel = async (channelId) => {
   try {
     const response = await httpsRequest.get('channels', {
-      params: { ...options },
+      params: {
+        part: 'snippet',
+        key: 'AIzaSyD_5uon3aJwTEEXBcqVXsuuCqXRnytPUA4',
+        id: channelId,
+      },
     });
     return response.data;
   } catch (error) {
-    alert(error);
+    if (error.response.status) return error.response.status;
   }
 };
