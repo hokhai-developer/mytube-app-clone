@@ -10,7 +10,7 @@ export const signInWithGoogle = async () => {
       return signIn.user;
     }
   } catch (error) {
-    alert(error);
+    console.log(error);
     return;
   }
 };

@@ -92,11 +92,11 @@ const HomeVideoItem = ({
   const _duration = moment.utc(seconds * 1000).format('mm:ss');
 
   useEffect(() => {
-    const fetchApi = async () => {
-      const response = await getChannel(channelId);
+    const fetchApi = async (options) => {
+      const response = await getChannel(options);
       if (response && response.items) {
         const _channel = {
-          channelId: response.items[0].id || channelId,
+          channelId: response.items[0].id || options.channelId,
           photoURL: {
             high: response.items[0].snippet.thumbnails.high.url,
             medium: response.items[0].snippet.thumbnails.medium.url,
@@ -113,7 +113,10 @@ const HomeVideoItem = ({
         });
       }
     };
-    fetchApi();
+    fetchApi({
+      channelId: channelId,
+      part: 'snippet',
+    });
   }, [channelId]);
 
   const menuSettingItemVideoHasAuth = { ...MENU_SETTINGS_VIDEO_ITEM };

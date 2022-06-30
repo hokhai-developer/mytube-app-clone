@@ -1,15 +1,15 @@
-import MainLayout from '~/layouts/MainLayout';
-import Search from '~/pages/Search';
-import HomePage from '~/pages/HomePage';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LayoutNotfound from './layouts/LayoutNotfound';
-import Notfound from './pages/Notfound/Notfound';
-import React, { useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { Auth } from '~/firebase/firebaseConfig';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Auth } from '~/firebase/firebaseConfig';
+import MainLayout from '~/layouts/MainLayout';
+import HomePage from '~/pages/HomePage';
+import SearchPage from '~/pages/SearchPage';
 import authSlice from '~/redux/authSlice';
 import { authSelector } from '~/redux/selector';
+import LayoutNotfound from './layouts/LayoutNotfound';
+import Notfound from './pages/Notfound/Notfound';
 
 function App() {
   const dispatch = useDispatch();
@@ -40,10 +40,10 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/shorts" element={<Search />} />
-          <Route path="/explore" element={<Search />} />
-          <Route path="/subscriptions" element={<Search />} />
+          <Route path="/results/:searchValue" element={<SearchPage />} />
+          <Route path="/shorts" element={<SearchPage />} />
+          <Route path="/explore" element={<SearchPage />} />
+          <Route path="/subscriptions" element={<SearchPage />} />
         </Route>
 
         <Route path="/notfound" element={<LayoutNotfound />}>

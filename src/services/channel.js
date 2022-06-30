@@ -1,16 +1,17 @@
+import { bindActionCreators } from 'redux';
 import httpsRequest from '~/utils/httpsRequest';
 
-export const getChannel = async (channelId) => {
+export const getChannel = async (options) => {
   try {
     const response = await httpsRequest.get('channels', {
       params: {
-        part: 'snippet',
-        key: 'AIzaSyD_5uon3aJwTEEXBcqVXsuuCqXRnytPUA4',
-        id: channelId,
+        part: options.part,
+        key: 'AIzaSyA29jsxw6Lrr_iO1tJvHdW_NvkEOJGIQCk',
+        id: options.channelId,
       },
     });
     return response.data;
   } catch (error) {
-    if (error.response.status) return error.response.status;
+    console.log(error);
   }
 };

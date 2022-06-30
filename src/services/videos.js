@@ -5,12 +5,13 @@ export const getVideos = async (options) => {
     const response = await httpsRequest.get('videos', {
       params: {
         part: 'snippet,contentDetails,statistics',
-        key: 'AIzaSyD_5uon3aJwTEEXBcqVXsuuCqXRnytPUA4',
-        chart: 'mostPopular',
+        key: 'AIzaSyA29jsxw6Lrr_iO1tJvHdW_NvkEOJGIQCk',
+        chart: options.chart,
         regionCode: 'VN',
-        maxResults: 12,
+        maxResults: options.maxResults,
         videoCategoryId: options.videoCategoryId,
         pageToken: options.pageToken,
+        id: options.videoId,
       },
     });
     return response.data;

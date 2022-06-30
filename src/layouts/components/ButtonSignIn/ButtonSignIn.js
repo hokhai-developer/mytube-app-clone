@@ -16,8 +16,7 @@ const ButtonSignIn = ({ className }) => {
   const handleSignIN = async () => {
     const result = await signInWithGoogle();
     if (result) {
-      const { accessToken, displayName, email, photoURL, uid } = result;
-      console.log({ accessToken, displayName, email, photoURL, uid });
+      const { displayName, accessToken, email, photoURL, uid } = result;
       dispatch(
         authSlice.actions.signInAuth({
           accessToken,

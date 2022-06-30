@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Images from '~/assets/Images';
 import {
@@ -22,8 +22,10 @@ import {
 } from './DataMenu';
 import ListSideBar from '../ListSideBar';
 import styles from './SideBar.module.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authSelector } from '~/redux/selector';
+import { getChannel } from '~/services/channel';
+import { subscriptionsSelector } from '~/redux/selector';
 
 const PLAYLIST = [
   {
@@ -57,146 +59,58 @@ const PLAYLIST = [
   },
 ];
 
-const SUB_CHANNEL = {
-  type: 'subscriptions',
-  head: 'subscriptions',
-  values: [
-    {
-      id: uuidv4(),
-      channelID: uuidv4(),
-      type: 'subscriptions',
-      title: 'F8',
-      iconLeft: <Image src={Images.noImage} alt="channel name" />,
-      iconRight: <LiveIcon />,
-      path: '/channel',
-    },
-    {
-      id: uuidv4(),
-      channelID: uuidv4(),
-      type: 'subscriptions',
-      title: 'Hoi Dan IT',
-      iconLeft: <Image src={Images.noImage} alt="channel name" />,
-      iconRight: null,
-      path: '/channel',
-    },
-    {
-      id: uuidv4(),
-      channelID: uuidv4(),
-      type: 'subscriptions',
-      title: 'Easy Frontend',
-      iconLeft: <Image src={Images.noImage} alt="channel name" />,
-      iconRight: <LiveIcon />,
-      path: '/channel',
-    },
-    {
-      id: uuidv4(),
-      channelID: uuidv4(),
-      title: 'Henry dev web',
-      type: 'subscriptions',
-      iconLeft: <Image src={Images.noImage} alt="channel name" />,
-      iconRight: null,
-      path: '/channel',
-    },
-    {
-      id: uuidv4(),
-      channelID: uuidv4(),
-      title: 'Hole Text',
-      type: 'subscriptions',
-      iconLeft: <Image src={Images.noImage} alt="channel name" />,
-      iconRight: null,
-      path: '/channel',
-    },
-    {
-      id: uuidv4(),
-      channelID: uuidv4(),
-      title: 'evondev',
-      type: 'subscriptions',
-      iconLeft: <Image src={Images.noImage} alt="channel name" />,
-      iconRight: <LiveIcon />,
-      path: '/channel',
-    },
-    {
-      id: uuidv4(),
-      channelID: uuidv4(),
-      title: 'Online Tutorials',
-      type: 'subscriptions',
-      iconLeft: <Image src={Images.noImage} alt="channel name" />,
-      iconRight: null,
-      path: '/channel',
-    },
-    {
-      id: uuidv4(),
-      channelID: uuidv4(),
-      title: 'F8',
-      type: 'subscriptions',
-      iconLeft: <Image src={Images.noImage} alt="channel name" />,
-      iconRight: <LiveIcon />,
-      path: '/channel',
-    },
-    {
-      id: uuidv4(),
-      title: 'Hoi Dan IT',
-      channelID: uuidv4(),
-      type: 'subscriptions',
-      iconLeft: <Image src={Images.noImage} alt="channel name" />,
-      iconRight: null,
-      path: '/channel',
-    },
-    {
-      id: uuidv4(),
-      title: 'Easy Frontend',
-      type: 'subscriptions',
-      channelID: uuidv4(),
-      iconLeft: <Image src={Images.noImage} alt="channel name" />,
-      iconRight: <LiveIcon />,
-      path: '/channel',
-    },
-    {
-      id: uuidv4(),
-      title: 'Henry dev web',
-      type: 'subscriptions',
-      channelID: uuidv4(),
-      iconLeft: <Image src={Images.noImage} alt="channel name" />,
-      iconRight: null,
-      path: '/channel',
-    },
-    {
-      id: uuidv4(),
-      title: 'Hole Text',
-      channelID: uuidv4(),
-      type: 'subscriptions',
-      iconLeft: <Image src={Images.noImage} alt="channel name" />,
-      iconRight: null,
-      path: '/channel',
-    },
-    {
-      id: uuidv4(),
-      title: 'evondev',
-      type: 'subscriptions',
-      channelID: uuidv4(),
-      iconLeft: <Image src={Images.noImage} alt="channel name" />,
-      iconRight: <LiveIcon />,
-      path: '/channel',
-    },
-    {
-      id: uuidv4(),
-      channelID: uuidv4(),
-      title: 'Online Tutorials',
-      type: 'subscriptions',
-      iconLeft: <Image src={Images.noImage} alt="channel name" />,
-      iconRight: null,
-      path: '/channel',
-    },
-  ],
-};
-
 const cx = classNames.bind(styles);
 const SideBar = (props) => {
   const [showLibrary, setShowMoreLibrary] = useState(false);
   const [showSubscriptions, setShowSubscriptions] = useState(false);
+  const [subscriptionsChannel, setSubscriptionsChannel] = useState({
+    type: 'subscriptions',
+    head: 'subscriptions',
+    values: [],
+  });
   const [playlist, setPlaylist] = useState(PLAYLIST);
   const toggleSideBar = useContext(ToggleSideBarContext);
   const auth = useSelector(authSelector);
+  const dispatch = useDispatch();
+  const subscriptions = useSelector(subscriptionsSelector);
+
+  useEffect(() => {
+    if (auth.sate === 0) {
+      return;
+    }
+    const listChannelSubscriptions = [];
+    const fetchChannelSubscriptions = async (options) => {
+      const result = await getChannel(options);
+
+      if (result && result.items) {
+        const channel = {
+          id: result.items[0].id,
+          channelID: result.items[0].id,
+          type: 'subscriptions',
+          title: result.items[0].snippet.title,
+          iconLeft: (
+            <Image
+              src={result.items[0].snippet.thumbnails.default.url}
+              alt={result.items[0].snippet.title}
+            />
+          ),
+          path: `channel/${result.items[0].id}`,
+        };
+        listChannelSubscriptions.push(channel);
+      }
+    };
+
+    subscriptions.forEach((channelId) => {
+      fetchChannelSubscriptions({
+        channelId: channelId,
+        part: 'snippet',
+      });
+    });
+    setSubscriptionsChannel((prev) => ({
+      ...prev,
+      values: listChannelSubscriptions,
+    }));
+  }, [subscriptions.length]);
 
   //popular
   const popularData = { ...MENU_DATA_POPULAR };
@@ -227,12 +141,15 @@ const SideBar = (props) => {
   //subscription
   const subscriptionsData = () => {
     if (toggleSideBar.value || auth.status === 0) {
-      return { ...SUB_CHANNEL, values: [] };
+      return { ...subscriptionsChannel, values: [] };
     }
     if (showSubscriptions) {
-      return { ...SUB_CHANNEL };
+      return { ...subscriptionsChannel };
     }
-    return { ...SUB_CHANNEL, values: [...SUB_CHANNEL.values].slice(0, 6) };
+    return {
+      ...subscriptionsChannel,
+      values: [...subscriptionsChannel.values].slice(0, 6),
+    };
   };
 
   const moreFromYoutubeData = () => {
@@ -285,7 +202,6 @@ const SideBar = (props) => {
   const handleShowSubscriptions = () => {
     setShowSubscriptions(!showSubscriptions);
   };
-
   return (
     <aside
       className={cx('wrapper', {
@@ -324,7 +240,7 @@ const SideBar = (props) => {
               }
               title={
                 !showSubscriptions
-                  ? `Show  ${SUB_CHANNEL.values.length - 7} more`
+                  ? `Show  ${subscriptionsChannel.values.length - 7} more`
                   : 'Show less'
               }
             />

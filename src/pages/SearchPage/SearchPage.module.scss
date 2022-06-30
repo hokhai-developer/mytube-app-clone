@@ -1,0 +1,11 @@
+@import '../../components/GlobalStyle/GlobalStyle.module.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: $padding-max $padding-medium;
+  height: calc(100vh - $header-height);
+  gap: $gap-min 0;
+  border-top: 1px solid $color-border;
+  overflow: overlay;
+}

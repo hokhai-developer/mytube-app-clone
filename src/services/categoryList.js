@@ -5,7 +5,7 @@ export const getCategoryList = async () => {
     const response = await httpsRequest.get('videoCategories', {
       params: {
         part: 'snippet',
-        key: 'AIzaSyD_5uon3aJwTEEXBcqVXsuuCqXRnytPUA4',
+        key: 'AIzaSyA29jsxw6Lrr_iO1tJvHdW_NvkEOJGIQCk',
         regionCode: 'VN',
       },
     });

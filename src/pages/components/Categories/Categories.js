@@ -62,6 +62,8 @@ const Categories = ({ scrollIntoView }) => {
   async function fetchVideosApi(options) {
     const results = await getVideos({
       videoCategoryId: options.categoryID,
+      maxResults: 12,
+      chart: 'mostPopular',
     });
 
     if (results && results.items) {

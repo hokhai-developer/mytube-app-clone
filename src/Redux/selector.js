@@ -8,3 +8,6 @@ export const homeSelector = (state) => {
 export const categorySelector = (state) => {
   return state.category;
 };
+export const subscriptionsSelector = (state) => {
+  return state.subscriptions;
+};

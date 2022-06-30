@@ -3,10 +3,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from './HomePage.module.scss';
-import HomeVideoItem from '../components/HomeVideoItem/HomeVideoItem';
+import HomeVideoItem from '../components/HomeVideoItem';
 import Categories from '../components/Categories/Categories';
 import { getVideos } from '~/services/videos';
-import { categorySelector, homeSelector } from '~/redux/selector';
+import { categorySelector, homeSelector, authSelector } from '~/redux/selector';
 import { useDispatch, useSelector } from 'react-redux';
 import homeSlice from '~/redux/homeSlice';
 import ScrollInfinity from '~/components/ScrollInfinity';
@@ -18,6 +18,7 @@ const HomePage = (props) => {
   const topRef = useRef();
   const homeVideos = useSelector(homeSelector);
   const category = useSelector(categorySelector);
+  const auth = useSelector(authSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,6 +48,9 @@ const HomePage = (props) => {
     const results = await getVideos({
       videoCategoryId: videoCategoryId,
       pageToken: nextPageToken,
+      accessToken: auth.user.accessToken,
+      maxResults: 12,
+      chart: 'mostPopular',
     });
     if (results && results.items) {
       const listVideos = results.items.map((item) => {

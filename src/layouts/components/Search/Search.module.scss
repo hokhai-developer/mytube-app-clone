@@ -5,11 +5,13 @@
   border: 1px solid $color-border;
 
   .search-icon {
+    // display: none;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 10px;
     background-color: transparent;
+    margin-right: -$padding-min;
     .icon {
       width: 20px;
       height: 20px;
@@ -17,7 +19,9 @@
   }
   .search-input {
     flex: 1;
+    padding-left: $padding-min;
   }
+
   .clear-btn {
     @include btn-icon;
   }
