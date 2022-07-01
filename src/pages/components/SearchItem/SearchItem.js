@@ -41,10 +41,10 @@ const SearchItem = ({
         const videoCount = result.items[0].statistics.videoCount;
         setVideoCount(videoCount);
       }
-      console.log(result);
     };
     fetchChannel({
-      channelId: channelId,
+      key: 'AIzaSyA9Pm4YhmuhpMsRcrB82tkUIaG4UJ9cLr4',
+      id: channelId,
       part: 'statistics',
     });
   }, [subscriptions.length]);
@@ -69,8 +69,9 @@ const SearchItem = ({
       }
     };
     fetchChannel({
-      channelId: channelId,
+      key: 'AIzaSyA9Pm4YhmuhpMsRcrB82tkUIaG4UJ9cLr4',
       part: 'snippet',
+      id: channelId,
     });
 
     const fetchVideo = async (options) => {
@@ -88,9 +89,12 @@ const SearchItem = ({
         });
       }
     };
-    // fetchVideo({
-    //   videoId: videoId,
-    // });
+    fetchVideo({
+      id: videoId,
+      part: 'snippet,contentDetails,statistics',
+      key: 'AIzaSyA9Pm4YhmuhpMsRcrB82tkUIaG4UJ9cLr4',
+      regionCode: 'VN',
+    });
   }, []);
 
   return (
@@ -124,7 +128,7 @@ const SearchItem = ({
           {kind === 'youtube#channel' ? channelTitle : title}
         </h5>
         {kind === 'youtube#channel' && (
-          <p className={cx('video-count')}>{videoCount}</p>
+          <p className={cx('video-count')}>{videoCount} videos</p>
         )}
 
         {kind === 'youtube#playlist' && (

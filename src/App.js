@@ -40,10 +40,10 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="/results/:searchValue" element={<SearchPage />} />
-          <Route path="/shorts" element={<SearchPage />} />
-          <Route path="/explore" element={<SearchPage />} />
-          <Route path="/subscriptions" element={<SearchPage />} />
+          <Route path="/results/:searchValue" element={<Notfound />} />
+          <Route path="/shorts" element={<Notfound />} />
+          <Route path="/explore" element={<Notfound />} />
+          <Route path="/subscriptions" element={<Notfound />} />
         </Route>
 
         <Route path="/notfound" element={<LayoutNotfound />}>

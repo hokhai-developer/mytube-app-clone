@@ -44,13 +44,14 @@ const HomePage = (props) => {
     if (!nextPageToken) {
       return;
     }
-
     const results = await getVideos({
+      part: 'snippet,contentDetails,statistics',
+      key: 'AIzaSyA29jsxw6Lrr_iO1tJvHdW_NvkEOJGIQCk',
+      regionCode: 'VN',
+      chart: 'mostPopular',
       videoCategoryId: videoCategoryId,
       pageToken: nextPageToken,
-      accessToken: auth.user.accessToken,
       maxResults: 12,
-      chart: 'mostPopular',
     });
     if (results && results.items) {
       const listVideos = results.items.map((item) => {
@@ -89,7 +90,9 @@ const HomePage = (props) => {
 
   //scrollIntoView to the top page
   const handleScrollIntoView = () => {
-    topRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (topRef.current) {
+      topRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
   return (
     <div className={cx('wrapper')}>

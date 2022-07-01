@@ -23,7 +23,6 @@ const Slice = ({ children, translateX = 400 }) => {
   const handleNext = () => {
     const container = containerRef.current;
     const wrapper = wrapperRef.current;
-    console.log(ratio, container.offsetWidth);
     let translate = -translateX * (currentIndex + 1);
     if (currentIndex + 1 === ratio) {
       translate = -(container.offsetWidth - wrapper.offsetWidth + 16);

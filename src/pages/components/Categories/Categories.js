@@ -8,6 +8,7 @@ import { categorySelector, homeSelector } from '~/redux/selector';
 import { getCategoryList } from '~/services/categoryList';
 import categorySlice from '~/redux/categorySlice';
 import { getVideos } from '~/services/videos';
+import { Search } from '~/services/search';
 import homeSlice from '~/redux/homeSlice';
 
 const cx = classNames.bind(styles);
@@ -27,8 +28,8 @@ const Categories = ({ scrollIntoView }) => {
     }
 
     //fetch categories
-    const fetchCategoryApi = async () => {
-      const results = await getCategoryList();
+    const fetchCategoryApi = async (options) => {
+      const results = await getCategoryList(options);
       if (results && results.items) {
         const list = results.items.map((item) => {
           return {
@@ -56,7 +57,11 @@ const Categories = ({ scrollIntoView }) => {
         );
       }
     };
-    fetchCategoryApi();
+    fetchCategoryApi({
+      part: 'snippet',
+      key: 'AIzaSyA9Pm4YhmuhpMsRcrB82tkUIaG4UJ9cLr4',
+      regionCode: 'VN',
+    });
   }, []);
 
   async function fetchVideosApi(options) {
@@ -64,6 +69,9 @@ const Categories = ({ scrollIntoView }) => {
       videoCategoryId: options.categoryID,
       maxResults: 12,
       chart: 'mostPopular',
+      regionCode: 'VN',
+      part: 'snippet,contentDetails,statistics',
+      key: 'AIzaSyA29jsxw6Lrr_iO1tJvHdW_NvkEOJGIQCk',
     });
 
     if (results && results.items) {
@@ -94,20 +102,66 @@ const Categories = ({ scrollIntoView }) => {
       );
       setActive(options.categoryID);
       dispatch(categorySlice.actions.active(options));
-    } else if (results === 400) {
-      console.log('get video by search');
-      //get search
+    } else if (results.response.status === 404) {
+      const result = await Search({
+        key: 'AIzaSyA9Pm4YhmuhpMsRcrB82tkUIaG4UJ9cLr4',
+        part: 'snippet',
+        regionCode: 'VN',
+        q: options.title,
+        maxResults: 50,
+      });
+      if (result && result.items) {
+        const listItem = result.items.filter((_item) => {
+          return _item.id.kind === 'youtube#video';
+        });
+        const listVideo = listItem.map((_item) => {
+          return {
+            id: _item.id.videoId,
+            channelId: _item.snippet.channelId,
+            channelTitle: _item.snippet.channelTitle,
+            publishedAt: _item.snippet.publishedAt,
+            title: _item.snippet.title,
+            photoURL: {
+              default: _item.snippet.thumbnails.default.url,
+              medium: _item.snippet.thumbnails.medium.url,
+              high: _item.snippet.thumbnails.high.url,
+            },
+          };
+        });
+        if (listVideo.length > 0) {
+          listVideo.forEach((video, index, listVideo) => {
+            getVideos({
+              part: 'contentDetails,statistics',
+              id: video.id,
+              key: 'AIzaSyA9Pm4YhmuhpMsRcrB82tkUIaG4UJ9cLr4',
+            }).then((res) => {
+              listVideo[index].duration = res.items[0].contentDetails.duration;
+              listVideo[index].viewCount = res.items[0].statistics.viewCount;
+            });
+          });
+        }
+        dispatch(
+          homeSlice.actions.newVideos({
+            status: 1,
+            videoCategoryId: options.categoryID,
+            listVideos: listVideo,
+          }),
+        );
+        setActive(options.categoryID);
+        dispatch(categorySlice.actions.active(options));
+      }
     }
   }
 
   const handleClick = (item) => {
     scrollIntoView();
+
     if (item.categoryID === active) {
       //scrollIntoView
       return;
     }
     let index = homeVideos.map((video) => {
-      return homeVideos.videoCategoryId === item.categoryID;
+      return video.videoCategoryId === item.categoryID;
     });
 
     if (index === -1) {

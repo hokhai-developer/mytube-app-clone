@@ -90,7 +90,7 @@ const HomeVideoItem = ({
   const auth = useSelector(authSelector);
   const seconds = moment.duration(duration).asSeconds();
   const _duration = moment.utc(seconds * 1000).format('mm:ss');
-
+  console.log(viewCount);
   useEffect(() => {
     const fetchApi = async (options) => {
       const response = await getChannel(options);
@@ -114,7 +114,8 @@ const HomeVideoItem = ({
       }
     };
     fetchApi({
-      channelId: channelId,
+      key: 'AIzaSyA29jsxw6Lrr_iO1tJvHdW_NvkEOJGIQCk',
+      id: channelId,
       part: 'snippet',
     });
   }, [channelId]);
@@ -159,7 +160,8 @@ const HomeVideoItem = ({
             </div> */}
           </div>
           <div className={cx('view-time')}>
-            {numeral(viewCount).format('0.a')} • {moment(publishedAt).fromNow()}
+            {numeral(Number(viewCount)).format('0.a')} •{' '}
+            {moment(publishedAt).fromNow()}
           </div>
         </div>
 

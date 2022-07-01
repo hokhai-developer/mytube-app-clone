@@ -101,10 +101,11 @@ const SideBar = (props) => {
     };
 
     subscriptions.forEach((channelId) => {
-      fetchChannelSubscriptions({
-        channelId: channelId,
-        part: 'snippet',
-      });
+      // fetchChannelSubscriptions({
+      //   id: channelId,
+      //   part: 'snippet',
+      //   key: 'AIzaSyA29jsxw6Lrr_iO1tJvHdW_NvkEOJGIQCk',
+      // });
     });
     setSubscriptionsChannel((prev) => ({
       ...prev,

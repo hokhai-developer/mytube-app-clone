@@ -1,16 +1,12 @@
 import httpsRequest from '~/utils/httpsRequest';
 
-export const getCategoryList = async () => {
+export const getCategoryList = async (options) => {
   try {
     const response = await httpsRequest.get('videoCategories', {
-      params: {
-        part: 'snippet',
-        key: 'AIzaSyA29jsxw6Lrr_iO1tJvHdW_NvkEOJGIQCk',
-        regionCode: 'VN',
-      },
+      params: { ...options },
     });
     return response.data;
   } catch (error) {
-    if (error.response.status) return error.response.status;
+    return error;
   }
 };
