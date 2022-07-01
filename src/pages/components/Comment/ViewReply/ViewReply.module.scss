@@ -1,0 +1,22 @@
+@import '../../../../components/GlobalStyle/GlobalStyle.module.scss';
+
+.view-reply {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: $gap-min 0;
+  margin-top: -10px;
+  .btn {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    color: $color-secondary;
+    cursor: pointer;
+
+    .text {
+      margin-left: 10px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+}

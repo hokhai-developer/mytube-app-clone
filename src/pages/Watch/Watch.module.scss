@@ -1,0 +1,84 @@
+@import '../../components/GlobalStyle/GlobalStyle.module.scss';
+
+.wrapper {
+  display: flex;
+  width: 1068px;
+  overflow: overlay;
+  border: 1px solid red;
+  gap: 0 24px;
+  padding-top: 24px;
+  padding-bottom: 100px;
+
+  .watch-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $gap-medium/2 0;
+    width: 640px;
+
+    .video-location {
+      width: 100%;
+      height: 360px;
+    }
+
+    .tags {
+      font-size: 12px;
+      color: $color-secondary;
+      .tag {
+        cursor: pointer;
+      }
+    }
+
+    .title {
+      font-size: 20px;
+      color: $color-text-primary;
+      font-weight: 500;
+    }
+
+    .desc-less {
+      @include text-clamp(2);
+      width: 100%;
+      font-size: 14px;
+      .text-bold {
+        font-size: 14px;
+        font-weight: 500;
+        color: $color-text-primary;
+      }
+      .show-more {
+        font-weight: 500;
+        color: $color-secondary;
+        cursor: pointer;
+      }
+    }
+    .contain {
+      display: flex;
+      align-items: center;
+      gap: 0 $gap-max;
+      padding: $padding-min 0;
+
+      .total-comment {
+        font-size: 16px;
+        font-weight: 500;
+        color: $color-text-primary;
+      }
+
+      .sort-by {
+        display: flex;
+        align-items: center;
+        gap: 0 $gap-min;
+        cursor: pointer;
+        background-color: transparent;
+
+        .text {
+          font-size: 14px;
+          font-weight: 600;
+          color: $color-text-primary;
+        }
+      }
+    }
+  }
+
+  .watch-right {
+    flex: 1;
+  }
+}

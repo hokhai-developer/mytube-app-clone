@@ -1,0 +1,56 @@
+@import '../../../components/GlobalStyle/GlobalStyle.module.scss';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid $color-border;
+  height: 52px;
+  gap: 0 6px;
+
+  .total-comments {
+    padding: 12px;
+    // border-right: 1px solid $color-border;
+
+    .title {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .count {
+      font-size: 12px;
+      font-weight: 400;
+      color: $color-text-secondary;
+    }
+  }
+
+  .user-comment {
+    display: flex;
+    align-items: flex-start;
+    gap: 0 $gap-medium/2;
+    flex: 1;
+
+    .user-avatar {
+      flex-shrink: 0;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      object-fit: cover;
+      overflow: hidden;
+    }
+    .comment {
+      flex: 1;
+      font-size: 12px;
+      font-weight: 400;
+      @include text-clamp(2);
+    }
+  }
+
+  .btn-popup {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}

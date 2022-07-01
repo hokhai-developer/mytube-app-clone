@@ -1,10 +1,8 @@
 import classNames from 'classnames/bind';
 import { useContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Images from '~/assets/Images';
 import {
   BrowseIcon,
-  LiveIcon,
   PlaylistIcon,
   ShowLessIcon,
   ShowMoreIcon,
@@ -60,7 +58,7 @@ const PLAYLIST = [
 ];
 
 const cx = classNames.bind(styles);
-const SideBar = (props) => {
+const SideBar = ({ className }) => {
   const [showLibrary, setShowMoreLibrary] = useState(false);
   const [showSubscriptions, setShowSubscriptions] = useState(false);
   const [subscriptionsChannel, setSubscriptionsChannel] = useState({
@@ -71,7 +69,6 @@ const SideBar = (props) => {
   const [playlist, setPlaylist] = useState(PLAYLIST);
   const toggleSideBar = useContext(ToggleSideBarContext);
   const auth = useSelector(authSelector);
-  const dispatch = useDispatch();
   const subscriptions = useSelector(subscriptionsSelector);
 
   useEffect(() => {
@@ -101,11 +98,11 @@ const SideBar = (props) => {
     };
 
     subscriptions.forEach((channelId) => {
-      // fetchChannelSubscriptions({
-      //   id: channelId,
-      //   part: 'snippet',
-      //   key: 'AIzaSyA29jsxw6Lrr_iO1tJvHdW_NvkEOJGIQCk',
-      // });
+      fetchChannelSubscriptions({
+        id: channelId,
+        part: 'snippet',
+        key: 'AIzaSyA29jsxw6Lrr_iO1tJvHdW_NvkEOJGIQCk',
+      });
     });
     setSubscriptionsChannel((prev) => ({
       ...prev,
@@ -205,7 +202,7 @@ const SideBar = (props) => {
   };
   return (
     <aside
-      className={cx('wrapper', {
+      className={cx('wrapper', className, {
         toggleSideBar: toggleSideBar.value,
       })}
     >

@@ -90,7 +90,6 @@ const HomeVideoItem = ({
   const auth = useSelector(authSelector);
   const seconds = moment.duration(duration).asSeconds();
   const _duration = moment.utc(seconds * 1000).format('mm:ss');
-  console.log(viewCount);
   useEffect(() => {
     const fetchApi = async (options) => {
       const response = await getChannel(options);

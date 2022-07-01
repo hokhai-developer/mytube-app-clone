@@ -1,0 +1,56 @@
+@import '../../../../components/GlobalStyle/GlobalStyle.module.scss';
+
+.my-comment {
+  display: flex;
+  align-items: flex-start;
+  gap: 0 $gap-min;
+  width: 100%;
+
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .comment-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .top {
+      font-size: 14px;
+      width: 100%;
+      background-color: transparent;
+      border-bottom: 1px solid $color-border;
+      padding-bottom: 4px;
+      &:focus {
+        border-bottom: 1px solid $color-black;
+      }
+    }
+
+    .bottom {
+      align-self: flex-end;
+      margin-top: 4px;
+      .btn {
+        font-size: 14px;
+        font-weight: 500;
+        color: $color-text-secondary;
+        background-color: transparent;
+        cursor: pointer;
+        padding: $padding-min $padding-medium;
+        border-radius: $border-radius;
+
+        &.comment {
+          background-color: $color-background-btn-hover;
+          &.active {
+            background-color: $color-secondary;
+            color: $color-white;
+          }
+        }
+      }
+    }
+  }
+}

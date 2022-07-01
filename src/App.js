@@ -9,7 +9,9 @@ import SearchPage from '~/pages/SearchPage';
 import authSlice from '~/redux/authSlice';
 import { authSelector } from '~/redux/selector';
 import LayoutNotfound from './layouts/LayoutNotfound';
+import WatchVideoLayout from './layouts/WatchVideoLayout';
 import Notfound from './pages/Notfound/Notfound';
+import Watch from '~/pages/Watch';
 
 function App() {
   const dispatch = useDispatch();
@@ -41,9 +43,12 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
           <Route path="/results/:searchValue" element={<Notfound />} />
-          <Route path="/shorts" element={<Notfound />} />
           <Route path="/explore" element={<Notfound />} />
           <Route path="/subscriptions" element={<Notfound />} />
+        </Route>
+        {/* tam thoi */}
+        <Route path="/shorts" element={<WatchVideoLayout />}>
+          <Route path="/shorts" element={<Watch />} />
         </Route>
 
         <Route path="/notfound" element={<LayoutNotfound />}>

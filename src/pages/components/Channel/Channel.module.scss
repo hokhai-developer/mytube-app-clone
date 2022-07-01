@@ -1,0 +1,68 @@
+@import '../../../components/GlobalStyle/GlobalStyle.module.scss';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 58px;
+  padding: 8px;
+  border: 1px solid $color-border;
+
+  .channel-left {
+    display: flex;
+    align-items: center;
+    gap: 0 $gap-min;
+
+    .channel-thumb {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .channel {
+      .channel-name {
+        font-size: 14px;
+        color: $color-text-primary;
+        font-weight: 500;
+      }
+      .channel-subscribers {
+        font-size: 12px;
+        font-weight: 400;
+        color: $color-text-secondary;
+      }
+    }
+  }
+
+  .channel-right {
+    display: flex;
+    align-items: center;
+    gap: 0 $gap-min;
+
+    .btn {
+      font-size: 14px;
+      padding: 10px $padding-max;
+      border-radius: $border-radius;
+      background-color: $color-primary;
+      color: $color-white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .subscribed {
+      background-color: transparent;
+      color: $color-text-secondary;
+      font-weight: 500;
+      padding: 0;
+    }
+    .btn-notify {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+}

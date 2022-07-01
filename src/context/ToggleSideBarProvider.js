@@ -8,8 +8,12 @@ const ToggleSideBarProvider = ({ children }) => {
 
   const smallSideBar = {
     value: small,
-    toggle: () => {
-      setSmall(!small);
+    toggle: (bool) => {
+      if (bool === true || bool === false) {
+        setSmall(bool);
+      } else {
+        setSmall(!small);
+      }
     },
   };
   return (

@@ -1,0 +1,29 @@
+@import '../../../components/GlobalStyle/GlobalStyle.module.scss';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0 $gap-min;
+
+  .action-item {
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    background-color: transparent;
+    cursor: pointer;
+
+    .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+    }
+    .title {
+      display: block;
+      font-size: 16px;
+      color: $color-text-primary;
+      font-weight: 500;
+    }
+  }
+}
