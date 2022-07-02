@@ -4,7 +4,6 @@
   display: flex;
   width: 1068px;
   overflow: overlay;
-  border: 1px solid red;
   gap: 0 24px;
   padding-top: 24px;
   padding-bottom: 100px;
@@ -13,72 +12,55 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: $gap-medium/2 0;
+    gap: $gap-max 0;
+    flex-shrink: 0;
     width: 640px;
-
-    .video-location {
-      width: 100%;
-      height: 360px;
-    }
-
-    .tags {
-      font-size: 12px;
-      color: $color-secondary;
-      .tag {
-        cursor: pointer;
-      }
-    }
-
-    .title {
-      font-size: 20px;
-      color: $color-text-primary;
-      font-weight: 500;
-    }
-
-    .desc-less {
-      @include text-clamp(2);
-      width: 100%;
-      font-size: 14px;
-      .text-bold {
-        font-size: 14px;
-        font-weight: 500;
-        color: $color-text-primary;
-      }
-      .show-more {
-        font-weight: 500;
-        color: $color-secondary;
-        cursor: pointer;
-      }
-    }
-    .contain {
-      display: flex;
-      align-items: center;
-      gap: 0 $gap-max;
-      padding: $padding-min 0;
-
-      .total-comment {
-        font-size: 16px;
-        font-weight: 500;
-        color: $color-text-primary;
-      }
-
-      .sort-by {
-        display: flex;
-        align-items: center;
-        gap: 0 $gap-min;
-        cursor: pointer;
-        background-color: transparent;
-
-        .text {
-          font-size: 14px;
-          font-weight: 600;
-          color: $color-text-primary;
-        }
-      }
-    }
   }
 
   .watch-right {
     flex: 1;
+    min-width: 402px;
+
+    //category
+    .category {
+      background-color: transparent;
+      width: 100%;
+
+      .chip {
+        cursor: pointer;
+        max-width: 224px;
+        display: block;
+        font-size: 16px;
+        font-weight: 300;
+        border: 1px solid $color-border;
+        padding: 2px $padding-medium;
+        border-radius: 9999em;
+        @include text-clamp(1);
+        flex-shrink: 0;
+        background-color: $color-background-btn;
+        user-select: none;
+        &.active {
+          background-color: $color-black;
+          color: $color-white;
+          cursor: none;
+          pointer-events: none;
+        }
+        &:hover {
+          background-color: $color-background-btn-hover;
+        }
+      }
+
+      .loading {
+        text-align: center;
+      }
+    }
+
+    //playlist
+    .playlist {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: $gap-min 0;
+    }
   }
 }

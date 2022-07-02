@@ -42,13 +42,13 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="/results/:searchValue" element={<Notfound />} />
+          <Route path="/results/:searchValue" element={<SearchPage />} />
           <Route path="/explore" element={<Notfound />} />
           <Route path="/subscriptions" element={<Notfound />} />
         </Route>
         {/* tam thoi */}
         <Route path="/shorts" element={<WatchVideoLayout />}>
-          <Route path="/shorts" element={<Watch />} />
+          <Route path="/shorts/:id" element={<Watch />} />
         </Route>
 
         <Route path="/notfound" element={<LayoutNotfound />}>

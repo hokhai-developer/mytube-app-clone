@@ -23,6 +23,7 @@ import {
 import { authSelector } from '~/redux/selector';
 import { useSelector } from 'react-redux';
 import Images from '~/assets/Images';
+import MenuSetting from '../MenuSetting/MenuSetting';
 
 const MENU_SETTINGS_VIDEO_ITEM = {
   type: 'settingsVideoItem',
@@ -165,44 +166,7 @@ const HomeVideoItem = ({
         </div>
 
         {/* tippy loi khi lan dau SignIn/signOut => khong thay doi menu duoc*/}
-        {auth.status === 1 && (
-          <Menu
-            data={menuSettingItemVideoHasAuth}
-            showMenu={showSettings}
-            setShowMenu={setShowSettings}
-            delay={[200, 800]}
-            offset={[-30, -30]}
-            placement="bottom-end"
-          >
-            <button
-              className={cx('icon-settings')}
-              onClick={() => {
-                setShowSettings(!showSettings);
-              }}
-            >
-              <SettingsIcon />
-            </button>
-          </Menu>
-        )}
-        {auth.status !== 1 && (
-          <Menu
-            data={menuSettingItemVideoNotAuth}
-            showMenu={showSettings}
-            setShowMenu={setShowSettings}
-            delay={[200, 800]}
-            offset={[-30, -30]}
-            placement="bottom-end"
-          >
-            <button
-              className={cx('icon-settings')}
-              onClick={() => {
-                setShowSettings(!showSettings);
-              }}
-            >
-              <SettingsIcon className={cx('icon')} />
-            </button>
-          </Menu>
-        )}
+        <MenuSetting className={cx('icon-settings')} />
       </div>
     </div>
   );

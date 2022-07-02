@@ -40,7 +40,6 @@ const Slice = ({ children, translateX = 400 }) => {
     container.style.transform = `translateX(${translate}px)`;
     setCurrentIndex(currentIndex - 1);
   };
-
   return (
     <div className={cx('wrapper')} ref={wrapperRef}>
       {currentIndex !== 0 && (

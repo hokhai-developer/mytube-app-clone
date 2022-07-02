@@ -5,6 +5,20 @@
   align-items: center;
   gap: 0 $gap-min;
 
+  .btn-setting {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon-rotate {
+    transform: rotate(90deg);
+    cursor: pointer;
+  }
+
+  //action-item
   .action-item {
     display: flex;
     align-items: center;
