@@ -20,7 +20,9 @@ const Slice = ({ children, translateX = 400 }) => {
     setRatio(Math.ceil((containerWidth - wrapperWidth) / translateX));
   }, [windowResize.windowWidth, containerRef.current?.offsetWidth]);
 
-  const handleNext = () => {
+  const handleNext = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     const container = containerRef.current;
     const wrapper = wrapperRef.current;
     let translate = -translateX * (currentIndex + 1);
@@ -34,7 +36,9 @@ const Slice = ({ children, translateX = 400 }) => {
     setCurrentIndex(currentIndex + 1);
   };
 
-  const handlePrev = () => {
+  const handlePrev = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     const container = containerRef.current;
     let translate = -translateX * (currentIndex - 1);
     container.style.transform = `translateX(${translate}px)`;
@@ -43,12 +47,12 @@ const Slice = ({ children, translateX = 400 }) => {
   return (
     <div className={cx('wrapper')} ref={wrapperRef}>
       {currentIndex !== 0 && (
-        <div className={cx('btn', 'btn-prev')} onClick={handlePrev}>
+        <div className={cx('btn', 'btn-prev')} onClick={(e) => handlePrev(e)}>
           <PreviousIcon />
         </div>
       )}
       {currentIndex !== ratio && (
-        <div className={cx('btn', 'btn-next')} onClick={handleNext}>
+        <div className={cx('btn', 'btn-next')} onClick={(e) => handleNext(e)}>
           <NextIcon />
         </div>
       )}

@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import numeral from 'numeral';
 import { useEffect, useState } from 'react';
 import Iframe from '../Iframe';
@@ -18,13 +19,15 @@ const VideoFull = ({ videoId }) => {
   useEffect(() => {
     const fetchVideoById = async (options) => {
       const result = await getVideos(options);
-      console.log(result);
       if (result && result.items) {
         const { tags, title, publishedAt, description } =
           result.items[0].snippet;
         const { viewCount } = result.items[0].statistics;
         let index = description.search('https://');
         let lessDescription = description.slice(0, index);
+        if (lessDescription.length > 150) {
+          lessDescription = lessDescription.slice(0, 150);
+        }
         setTitle(title);
         setTags(tags);
         setPublishedAt(publishedAt);
@@ -43,13 +46,12 @@ const VideoFull = ({ videoId }) => {
   }, [videoId]);
   return (
     <div className={cx('wrapper')}>
-      {moreDescription}
       <Iframe
         videoId={videoId}
         title={title}
         className={cx('iframe-location')}
       />
-      {tags.length > 0 && (
+      {tags && tags.length > 0 && (
         <p className={cx('tags')}>
           {tags.map((tag, index) => {
             if (index < 10) {
@@ -89,6 +91,8 @@ const VideoFull = ({ videoId }) => {
   );
 };
 
-VideoFull.propTypes = {};
+VideoFull.propTypes = {
+  videoId: PropTypes.string,
+};
 
 export default VideoFull;

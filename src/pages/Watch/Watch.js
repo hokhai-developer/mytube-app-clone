@@ -24,7 +24,7 @@ const Watch = (props) => {
     <div className={cx('wrapper')}>
       <div className={cx('watch-left')}>
         <VideoFull videoId={videoId} />
-        <ActionsWatchVideo videoId={'djMy4QsPWiI'} likeCount="6.8K" />
+        <ActionsWatchVideo videoId={videoId} />
         <Channel />
         <PopupComment />
         <div className={cx('contain')}>

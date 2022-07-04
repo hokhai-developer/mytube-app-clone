@@ -4,7 +4,7 @@
   width: 100%;
   position: relative;
   overflow: hidden;
-  padding: $padding-medium $padding-min;
+  padding: $padding-medium 0;
 
   &:hover .btn {
     opacity: 1;
@@ -35,12 +35,12 @@
     &.btn-prev {
       left: 0;
       top: 0;
-      transform: translate((50%, 30%));
+      transform: translate((0, calc(50% + 50%)));
     }
     &.btn-next {
       right: 0;
       top: 0;
-      transform: translate((-50%, 30%));
+      transform: translate((0, calc(50% + 50%)));
     }
   }
 

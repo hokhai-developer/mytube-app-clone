@@ -20,6 +20,7 @@
 
   //action-item
   .action-item {
+    position: relative;
     display: flex;
     align-items: center;
     text-transform: capitalize;
@@ -32,6 +33,10 @@
       justify-content: center;
       width: 36px;
       height: 36px;
+
+      &.active {
+        color: $color-primary;
+      }
     }
     .title {
       display: block;

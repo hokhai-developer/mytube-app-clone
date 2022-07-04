@@ -1,4 +1,4 @@
-import React, { Children, useState } from 'react';
+import React, { useState } from 'react';
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
@@ -6,7 +6,6 @@ import MenuItem from '../MenuItem';
 import styles from './Menu.module.scss';
 import { BackIcon } from '~/components/Icons/Icons';
 import Image from '~/components/Image';
-import Images from '~/assets/Images';
 import { useDispatch } from 'react-redux';
 import authSlice from '~/redux/authSlice';
 import { signOutAuth } from '~/firebase/signOut';

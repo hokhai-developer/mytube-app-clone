@@ -1,0 +1,52 @@
+@import '../../../GlobalStyle/GlobalStyle.module.scss';
+
+.wrapper {
+  width: 100%;
+  max-height: 100px;
+  display: flex;
+  flex-direction: column;
+  overflow: overlay;
+  gap: $gap-min 0;
+  background-color: $color-white;
+  padding-right: $padding-min;
+  border: 1px solid $color-border;
+}
+
+//menu select item
+.wrapper-item {
+  display: flex;
+
+  &:first-child {
+    margin-top: $padding-min;
+  }
+  &:last-child {
+    margin-bottom: $padding-min;
+  }
+  &:hover {
+    background-color: $color-background;
+  }
+  .item-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    aspect-ratio: 1/1;
+    background-color: transparent;
+  }
+  .item-body {
+    .body-title {
+      font-size: 14px;
+      color: $color-text-primary;
+      text-align: start;
+      padding: 2px 0;
+      text-transform: none;
+    }
+    .body-desc {
+      padding: 2px 0;
+      font-size: 12px;
+      color: $color-text-secondary;
+      text-transform: none;
+      padding-right: $padding-min;
+    }
+  }
+}

@@ -1,0 +1,53 @@
+@import '../../GlobalStyle/GlobalStyle.module.scss';
+
+.wrapper {
+  width: 100%;
+  max-height: 332px;
+  display: flex;
+  overflow: overlay;
+  flex-direction: column;
+  padding-right: $padding-min;
+  border-bottom: 1px solid $color-border;
+
+  .list-item {
+    display: flex;
+    align-items: center;
+    padding: $padding-min $padding-max;
+    cursor: pointer;
+    &:hover {
+      background-color: $color-background;
+    }
+    &:first-child {
+      margin-top: $padding-min;
+    }
+    &:last-child {
+      margin-bottom: $padding-min;
+    }
+
+    .item-input {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .item-name {
+      flex: 1;
+      font-size: 14px;
+      text-align: left;
+      padding-left: $gap-max;
+      color: $color-text-secondary;
+      @include text-clamp(1);
+    }
+
+    .item-btn {
+      flex-shrink: 0;
+      width: 30px;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+}
