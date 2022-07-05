@@ -11,3 +11,6 @@ export const categorySelector = (state) => {
 export const subscriptionsSelector = (state) => {
   return state.subscriptions;
 };
+export const playlistSelector = (state) => {
+  return state.playlist;
+};

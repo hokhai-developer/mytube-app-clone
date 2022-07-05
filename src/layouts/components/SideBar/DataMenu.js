@@ -55,50 +55,6 @@ export const MENU_DATA_POPULAR = {
   ],
 };
 
-export const MENU_DATA_LIBRARY = {
-  type: 'library',
-  head: null,
-  values: [
-    {
-      id: uuidv4(),
-      type: 'library',
-      title: 'Library',
-      iconLeft: <LibraryIcon />,
-      path: '/feed/library',
-    },
-    {
-      id: uuidv4(),
-      title: 'History',
-      type: 'library',
-      iconLeft: <HistoryIcon />,
-      path: '/feed/history',
-    },
-    {
-      id: uuidv4(),
-      type: 'library',
-      title: 'Your videos',
-      iconLeft: <VideosIcon />,
-      path: 'https://www.youtube.com',
-      target: true,
-    },
-    {
-      id: uuidv4(),
-      type: 'library',
-      title: 'Watch later',
-      iconLeft: <WatchIcon />,
-      path: '/playlist/watch',
-    },
-
-    {
-      id: uuidv4(),
-      type: 'library',
-      title: 'Likes videos',
-      iconLeft: <LikeIcon />,
-      path: '/playlist/likes',
-    },
-  ],
-};
-
 export const MENU_MORE_FROM_YOUTUBE = {
   type: 'moreFromYoutube',
   head: 'more from youtube',

@@ -3,6 +3,7 @@ import authSlice from './authSlice';
 import homeSlice from './homeSlice';
 import categorySlice from './categorySlice';
 import subscriptionsSlice from './subscriptionsSlice';
+import playlistSlice from './playlistSlice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     home: homeSlice.reducer,
     category: categorySlice.reducer,
     subscriptions: subscriptionsSlice.reducer,
+    playlist: playlistSlice.reducer,
   },
 });
 

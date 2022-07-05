@@ -53,6 +53,7 @@
         display: flex;
         align-items: center;
         cursor: pointer;
+        border: 1px solid $color-border;
 
         .selected-value {
           flex: 1;
@@ -71,6 +72,20 @@
           background-color: transparent;
           opacity: 0.75;
         }
+      }
+    }
+
+    .btn-new-list {
+      font-size: 14px;
+      font-weight: 500;
+      color: $color-secondary;
+      padding: $padding-max $padding-medium;
+      background-color: transparent;
+      align-self: flex-end;
+      background-color: $color-background-btn;
+      cursor: pointer;
+      &:hover {
+        background-color: $color-background-btn-hover;
       }
     }
   }

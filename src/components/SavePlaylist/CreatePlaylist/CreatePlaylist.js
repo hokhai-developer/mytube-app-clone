@@ -49,6 +49,7 @@ const CreatePlaylist = (props) => {
   const [inputValue, setInputValue] = useState('');
   const [privacy, setPrivacy] = useState('');
   const inputId = useId();
+
   return (
     <div className={cx('wrapper')}>
       {showCreate ? (
@@ -113,7 +114,10 @@ const CreatePlaylist = (props) => {
       ) : (
         <div
           className={cx('create-new-playlist')}
-          onClick={setShowCreate(true)}
+          onClick={(e) => {
+            e.preventDefault();
+            setShowCreate(true);
+          }}
         >
           <button className={cx('create-btn')}>
             <ClearIcon className={cx('rotate')} />

@@ -1,19 +1,13 @@
 import classNames from 'classnames/bind';
 import { useContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  BrowseIcon,
-  PlaylistIcon,
-  ShowLessIcon,
-  ShowMoreIcon,
-} from '~/components/Icons';
+import { BrowseIcon, ShowLessIcon, ShowMoreIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import { ToggleSideBarContext } from '~/context/ToggleSideBarProvider';
 import ButtonSignIn from '~/layouts/components/ButtonSignIn';
 import ItemSideBar from '../ItemSidebar';
 import {
   MENU_BEST_OF_YOUTUBE,
-  MENU_DATA_LIBRARY,
   MENU_DATA_POPULAR,
   MENU_MORE_FROM_YOUTUBE,
   MENU_SETTINGS,
@@ -23,62 +17,53 @@ import styles from './SideBar.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { authSelector } from '~/redux/selector';
 import { getChannel } from '~/services/channel';
-import { subscriptionsSelector } from '~/redux/selector';
-
-const PLAYLIST = [
-  {
-    type: 'playlist',
-    id: uuidv4(),
-    title: 'music',
-    iconLeft: <PlaylistIcon />,
-    path: '/playlist/list',
-    type: 'playlist',
-  },
-  {
-    id: uuidv4(),
-    title: 'Javascript',
-    iconLeft: <PlaylistIcon />,
-    path: '/playlist/list',
-    type: 'playlist',
-  },
-  {
-    id: uuidv4(),
-    type: 'playlist',
-    title: 'ReactJS',
-    iconLeft: <PlaylistIcon />,
-    path: '/playlist/list',
-  },
-  {
-    id: uuidv4(),
-    type: 'playlist',
-    title: 'HTML & CSS',
-    iconLeft: <PlaylistIcon />,
-    path: '/playlist/list',
-  },
-];
+import { subscriptionsSelector, playlistSelector } from '~/redux/selector';
+import SubscriptionsSlice from '~/redux/subscriptionsSlice';
 
 const cx = classNames.bind(styles);
 const SideBar = ({ className }) => {
-  const [showLibrary, setShowMoreLibrary] = useState(false);
   const [showSubscriptions, setShowSubscriptions] = useState(false);
-  const [subscriptionsChannel, setSubscriptionsChannel] = useState({
-    type: 'subscriptions',
-    head: 'subscriptions',
-    values: [],
-  });
-  const [playlist, setPlaylist] = useState(PLAYLIST);
+  const [subscriptionsLData, setSubscriptionsLData] = useState({});
+  const [showLibrary, setShowMoreLibrary] = useState(false);
+  const [libraryData, setLibraryData] = useState({});
+
   const toggleSideBar = useContext(ToggleSideBarContext);
   const auth = useSelector(authSelector);
   const subscriptions = useSelector(subscriptionsSelector);
+  const playlistOfAuth = useSelector(playlistSelector);
+  const dispatch = useDispatch();
 
+  //menu fake subscriptions
   useEffect(() => {
-    if (auth.sate === 0) {
-      return;
-    }
-    const listChannelSubscriptions = [];
+    const fakeChannelIdSub = [
+      'UCNSCWwgW-rwmoE3Yc4WmJhw',
+      'UCArT1kGzd_CyCTSCKrCEk-A',
+      'UCVkBcokjObNZiXavfAE1-fA',
+      'UCFbNIlppjAuEX4znoulh0Cw',
+      'UCqamjdcGALEjPreSrxwK9IQ',
+      'UCJJbLnrntQ4HsBn2KURJyRw',
+      'UCUjMB5vQyVjmFZDCX4VR31w',
+      'UCGRDayozk2qch3vw-qAtQng',
+      'UCEOnUMPAYjOTifkjbcOlR3g',
+      'UCIW9cGgoRuGJnky3K3tbzNg',
+      'UC8S4rDRZn6Z_StJ-hh7ph8g',
+      'UCbwXnUipZsLfUckBPsC7Jog',
+      'UC3mG4KEY2zkSemb1LunN97w',
+      'UC8vjHOEYlnVTqAgE6CFDm_Q',
+      'UCd3lwxW89gegn-6rgLdXugw',
+      'UC2Q8U6edHWMLP2_U15KhJeQ',
+      'UCI2OiZs5aVcyBUBVsgovzng',
+      'UC0IpGYsi1KVorZ7QVCHfdag',
+      'UC-3WU7dH0dvZ5BkSSI7zK_w',
+      'UCG2ovypNCpVOTFeY1YCocmQ',
+      'UCJZv4d5rbIKd4QHMPkcABCw',
+      'UC29ju8bIPH5as8OGnQzwJyA',
+      'UCvM5YYWwfLwpcQgbRr68JLQ',
+      'UCpm6kKrf5OdNRZ9hMgk3gsA',
+    ];
+    let subChannelList = [];
     const fetchChannelSubscriptions = async (options) => {
       const result = await getChannel(options);
-
       if (result && result.items) {
         const channel = {
           id: result.items[0].id,
@@ -93,62 +78,93 @@ const SideBar = ({ className }) => {
           ),
           path: `channel/${result.items[0].id}`,
         };
-        listChannelSubscriptions.push(channel);
+        subChannelList.push(channel);
+      }
+      if (subChannelList.length === fakeChannelIdSub.length) {
+        dispatch(SubscriptionsSlice.actions.add(subChannelList));
       }
     };
 
-    subscriptions.forEach((channelId) => {
+    fakeChannelIdSub.forEach((channelId, index) => {
       fetchChannelSubscriptions({
         id: channelId,
         part: 'snippet',
         key: 'AIzaSyA29jsxw6Lrr_iO1tJvHdW_NvkEOJGIQCk',
       });
     });
-    setSubscriptionsChannel((prev) => ({
-      ...prev,
-      values: listChannelSubscriptions,
-    }));
-  }, [subscriptions.length]);
+  }, []);
+
+  //menu library
+  useEffect(() => {
+    if (auth.status === 0 || toggleSideBar.value) {
+      setLibraryData(() => {
+        return {
+          ...playlistOfAuth,
+          values: [...playlistOfAuth.values.slice(0, 2)],
+        };
+      });
+      return;
+    }
+
+    if (showLibrary) {
+      setLibraryData(() => {
+        return {
+          ...playlistOfAuth,
+        };
+      });
+    } else {
+      setLibraryData(() => {
+        return {
+          ...playlistOfAuth,
+          values: [...playlistOfAuth.values.slice(0, 5)],
+        };
+      });
+    }
+  }, [
+    playlistOfAuth.values.length,
+    auth.status,
+    toggleSideBar.value,
+    showLibrary,
+  ]);
+
+  //menu subscriptions
+  useEffect(() => {
+    if (auth.status === 0 || toggleSideBar.value) {
+      setSubscriptionsLData(() => {
+        return {
+          ...subscriptions,
+          values: [],
+        };
+      });
+      return;
+    } else if (showSubscriptions) {
+      setSubscriptionsLData(() => {
+        return {
+          ...subscriptions,
+        };
+      });
+      return;
+    } else {
+      setSubscriptionsLData(() => {
+        return {
+          ...subscriptions,
+          values: [...subscriptions.values.slice(0, 6)],
+        };
+      });
+      return;
+    }
+  }, [
+    auth.status,
+    toggleSideBar.value,
+    subscriptions.values.length,
+    showSubscriptions,
+  ]);
 
   //popular
   const popularData = { ...MENU_DATA_POPULAR };
 
-  //menu library
-  const libraryData = () => {
-    if (toggleSideBar.value) {
-      return {
-        ...MENU_DATA_LIBRARY,
-        values: [...MENU_DATA_LIBRARY.values.slice(0, 2)],
-      };
-    }
-    if (auth.status === 0) {
-      return {
-        ...MENU_DATA_LIBRARY,
-        values: [...MENU_DATA_LIBRARY.values.slice(0, 2)],
-      };
-    }
-    if (showLibrary) {
-      return {
-        ...MENU_DATA_LIBRARY,
-        values: [...MENU_DATA_LIBRARY.values.concat(playlist)],
-      };
-    }
-    return { ...MENU_DATA_LIBRARY };
-  };
-
   //subscription
-  const subscriptionsData = () => {
-    if (toggleSideBar.value || auth.status === 0) {
-      return { ...subscriptionsChannel, values: [] };
-    }
-    if (showSubscriptions) {
-      return { ...subscriptionsChannel };
-    }
-    return {
-      ...subscriptionsChannel,
-      values: [...subscriptionsChannel.values].slice(0, 6),
-    };
-  };
+  const subscriptionsData = () => {};
 
   const moreFromYoutubeData = () => {
     if (toggleSideBar.value) {
@@ -192,12 +208,14 @@ const SideBar = ({ className }) => {
   };
 
   //popular
-  const handleShowLibrary = () => {
+  const handleShowLibrary = (e) => {
+    e.stopPropagation();
     setShowMoreLibrary(!showLibrary);
   };
 
   //subscriptions
-  const handleShowSubscriptions = () => {
+  const handleShowSubscriptions = (e) => {
+    e.stopPropagation();
     setShowSubscriptions(!showSubscriptions);
   };
   return (
@@ -210,41 +228,41 @@ const SideBar = ({ className }) => {
         <ListSideBar data={popularData} />
       )}
 
-      {libraryData() && libraryData().values.length > 0 && (
+      {libraryData && libraryData.values && libraryData.values.length > 0 && (
         <>
-          <ListSideBar data={libraryData()} />
+          <ListSideBar data={libraryData} />
           {!toggleSideBar.value && auth.status === 1 && (
             <ItemSideBar
               className={cx('show')}
-              onClick={handleShowLibrary}
+              onClick={(e) => handleShowLibrary(e)}
               iconLeft={!showLibrary ? <ShowLessIcon /> : <ShowMoreIcon />}
-              title={
-                !showLibrary ? `Show ${playlist.length} more` : 'Show less'
-              }
+              title={!showLibrary ? 'Show more' : 'Show less'}
             />
           )}
         </>
       )}
 
-      {subscriptionsData() && subscriptionsData().values.length > 0 && (
-        <>
-          <ListSideBar data={subscriptionsData()} />
-          {auth.status === 1 && (
-            <ItemSideBar
-              className={cx('show')}
-              onClick={handleShowSubscriptions}
-              iconLeft={
-                !showSubscriptions ? <ShowLessIcon /> : <ShowMoreIcon />
-              }
-              title={
-                !showSubscriptions
-                  ? `Show  ${subscriptionsChannel.values.length - 7} more`
-                  : 'Show less'
-              }
-            />
-          )}
-        </>
-      )}
+      {subscriptionsLData &&
+        subscriptionsLData.values &&
+        subscriptionsLData.values.length > 0 && (
+          <>
+            <ListSideBar data={subscriptionsLData} />
+            {auth.status === 1 && (
+              <ItemSideBar
+                className={cx('show')}
+                onClick={(e) => handleShowSubscriptions(e)}
+                iconLeft={
+                  !showSubscriptions ? <ShowLessIcon /> : <ShowMoreIcon />
+                }
+                title={
+                  !showSubscriptions
+                    ? `Show  ${subscriptionsLData.values.length - 7} more`
+                    : 'Show less'
+                }
+              />
+            )}
+          </>
+        )}
 
       {auth.status !== 1 && !toggleSideBar.value && (
         <section className={cx('sign-in')}>
