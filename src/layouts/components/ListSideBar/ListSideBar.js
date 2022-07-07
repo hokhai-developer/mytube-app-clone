@@ -37,7 +37,8 @@ const ListSideBar = ({ data = {} }) => {
               title={item.title}
               path={item.path}
               target={item.target ? item.target : null}
-              channelID={item.channelID ? item.channelID : null}
+              channelId={item.channelId ? item.channelId : null}
+              thumbnails={item.thumbnails}
             />
           );
         })}

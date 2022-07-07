@@ -64,19 +64,20 @@ const SideBar = ({ className }) => {
     let subChannelList = [];
     const fetchChannelSubscriptions = async (options) => {
       const result = await getChannel(options);
-      if (result && result.items) {
+      if (result && result.items && result.items[0]) {
+        const { id } = result.items[0];
+        const { title, thumbnails } = result.items[0].snippet;
         const channel = {
-          id: result.items[0].id,
-          channelID: result.items[0].id,
+          id: id,
+          channelId: id,
           type: 'subscriptions',
-          title: result.items[0].snippet.title,
-          iconLeft: (
-            <Image
-              src={result.items[0].snippet.thumbnails.default.url}
-              alt={result.items[0].snippet.title}
-            />
-          ),
-          path: `channel/${result.items[0].id}`,
+          title: title,
+          thumbnails: [
+            thumbnails.default.url,
+            thumbnails.medium.url,
+            thumbnails.high.url,
+          ],
+          path: `channel/${id}`,
         };
         subChannelList.push(channel);
       }
@@ -162,9 +163,6 @@ const SideBar = ({ className }) => {
 
   //popular
   const popularData = { ...MENU_DATA_POPULAR };
-
-  //subscription
-  const subscriptionsData = () => {};
 
   const moreFromYoutubeData = () => {
     if (toggleSideBar.value) {
@@ -256,7 +254,7 @@ const SideBar = ({ className }) => {
                 }
                 title={
                   !showSubscriptions
-                    ? `Show  ${subscriptionsLData.values.length - 7} more`
+                    ? `Show  ${subscriptions.values.length - 7} more`
                     : 'Show less'
                 }
               />

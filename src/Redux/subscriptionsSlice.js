@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 
-const SubscriptionsSlice = createSlice({
+const subscriptionsSlice = createSlice({
   name: 'subscriptions',
   initialState: {
     type: 'subscriptions',
@@ -11,15 +11,24 @@ const SubscriptionsSlice = createSlice({
   },
   reducers: {
     add: (state, actions) => {
-      console.log(actions.payload);
       if (Array.isArray(actions.payload)) {
         state.values = state.values.concat(actions.payload);
       } else {
-        state.values.push(actions.payload);
+        state.values.unshift(actions.payload);
+      }
+      return state;
+    },
+    remove: (state, actions) => {
+      const index = state.values.findIndex((value) => {
+        return value.channelId === actions.payload.channelId;
+      });
+
+      if (index === 0 || index) {
+        state.values.splice(index, 1);
       }
       return state;
     },
   },
 });
 
-export default SubscriptionsSlice;
+export default subscriptionsSlice;

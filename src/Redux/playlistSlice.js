@@ -7,6 +7,9 @@ import {
   WatchIcon,
   LikeIcon,
   PlaylistIcon,
+  PublicIcon,
+  UnlistedIcon,
+  PrivateIcon,
 } from '~/components/Icons';
 
 const playlistSlice = createSlice({
@@ -52,13 +55,15 @@ const playlistSlice = createSlice({
         iconLeft: <LikeIcon />,
         path: '/playlist/likes',
       },
+
       {
         type: 'playlist',
         id: uuidv4(),
         title: 'music',
         iconLeft: <PlaylistIcon />,
         path: '/playlist/list',
-        type: 'playlist',
+        iconPrivacy: <PublicIcon />,
+        privacy: 'public',
       },
       {
         id: uuidv4(),
@@ -66,6 +71,8 @@ const playlistSlice = createSlice({
         iconLeft: <PlaylistIcon />,
         path: '/playlist/list',
         type: 'playlist',
+        iconPrivacy: <UnlistedIcon />,
+        privacy: 'unlisted',
       },
       {
         id: uuidv4(),
@@ -73,6 +80,8 @@ const playlistSlice = createSlice({
         title: 'ReactJS',
         iconLeft: <PlaylistIcon />,
         path: '/playlist/list',
+        iconPrivacy: <PrivateIcon />,
+        privacy: 'private',
       },
       {
         id: uuidv4(),
@@ -80,6 +89,8 @@ const playlistSlice = createSlice({
         title: 'HTML & CSS',
         iconLeft: <PlaylistIcon />,
         path: '/playlist/list',
+        iconPrivacy: <PrivateIcon />,
+        privacy: 'private',
       },
     ],
   },

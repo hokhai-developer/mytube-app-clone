@@ -5,23 +5,45 @@ import styles from './CommentItem.module.scss';
 import Image from '~/components/Image';
 import CommentAction from '../CommentAction';
 import { SettingsIcon } from '~/components/Icons';
+import moment from 'moment';
 
 const cx = classNames.bind(styles);
-const CommentItem = ({ photoURL, children }) => {
+const CommentItem = ({
+  id,
+  channelId,
+  authorProfileImageUrl,
+  authorDisplayName,
+  likeCount,
+  publishedAt,
+  textDisplay,
+  canReply,
+  totalReplyCount,
+  children,
+}) => {
+  const handlePublishedAt = (publishedAt) => {
+    const newPublishedAt = moment(publishedAt).fromNow();
+    if (newPublishedAt.startsWith('an')) {
+      return newPublishedAt.replace('an', 1);
+    }
+    if (newPublishedAt.startsWith('a')) {
+      return newPublishedAt.replace('a', 1);
+    }
+    return newPublishedAt;
+  };
   return (
     <div className={cx('comment-item')}>
       <div className={cx('channel-avatar')}>
-        <Image src="https://picsum.photos/200" />
+        <Image src={authorProfileImageUrl} alt={authorDisplayName} />
       </div>
       <div className={cx('center')}>
         <p className={cx('channel-name')}>
-          Channel name <span className={cx('publish')}>2 days ago</span>
+          {authorDisplayName}{' '}
+          <span className={cx('publish')}>
+            {handlePublishedAt(publishedAt)}
+          </span>
         </p>
 
-        <p className={cx('comment-title')}>
-          Mik chx xem đến tập Lù sở hữu sức mạnh thần mặt trời, nên mik mún hỏi
-          là nếu z thì Lù còn có thể co giản như cao su đc k
-        </p>
+        <p className={cx('comment-title')}>{textDisplay}</p>
         <CommentAction />
         {children}
       </div>

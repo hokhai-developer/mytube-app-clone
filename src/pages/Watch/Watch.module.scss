@@ -15,6 +15,34 @@
     gap: $gap-max 0;
     flex-shrink: 0;
     width: 640px;
+
+    .contain {
+      display: flex;
+      align-items: center;
+      gap: 0 $gap-max;
+      padding: $padding-min 0;
+      margin: 10px 0;
+
+      .total-comment {
+        font-size: 16px;
+        font-weight: 400;
+        color: $color-text-secondary;
+      }
+
+      .sort-by {
+        display: flex;
+        align-items: center;
+        gap: 0 $gap-min;
+        cursor: pointer;
+        background-color: transparent;
+
+        .text {
+          font-size: 14px;
+          font-weight: 600;
+          color: $color-text-primary;
+        }
+      }
+    }
   }
 
   .watch-right {

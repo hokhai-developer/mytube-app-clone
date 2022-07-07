@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ToggleSideBarContext } from '~/context/ToggleSideBarProvider';
+import Image from '~/components/Image';
 import styles from './ItemSideBar.module.scss';
 
 const cx = classNames.bind(styles);
@@ -11,11 +12,12 @@ const ItemSideBar = ({
   title = '',
   iconRight,
   path = '',
-  channelID = '',
+  channelId = '',
   target = null,
   onClick = () => {},
   type = '',
   className,
+  thumbnails,
   ...passProps
 }) => {
   const toggleSideBar = useContext(ToggleSideBarContext);
@@ -42,9 +44,7 @@ const ItemSideBar = ({
           ? (nav) =>
               cx('item', className, {
                 active: nav.isActive,
-                [type]: type === 'popular',
-                [type]: type === 'moreFromYoutube',
-                [type]: type === 'subscriptions',
+                [type]: type,
                 toggleSideBar: toggleSideBar.value,
               })
           : cx('item', className, {
@@ -60,7 +60,13 @@ const ItemSideBar = ({
           toggleSideBar: toggleSideBar.value,
         })}
       >
-        {iconLeft}
+        {iconLeft && iconLeft}
+        {thumbnails && (
+          <Image
+            src={thumbnails[0] || thumbnails[0] || thumbnails[0]}
+            alt={title}
+          />
+        )}
       </div>
       <h6
         className={cx('title', {
@@ -82,7 +88,7 @@ ItemSideBar.propTypes = {
   title: PropTypes.string,
   iconRight: PropTypes.node,
   path: PropTypes.string,
-  channelID: PropTypes.string,
+  channelId: PropTypes.string,
   onClick: PropTypes.func,
 };
 

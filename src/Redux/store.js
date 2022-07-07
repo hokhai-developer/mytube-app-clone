@@ -4,6 +4,7 @@ import homeSlice from './homeSlice';
 import categorySlice from './categorySlice';
 import subscriptionsSlice from './subscriptionsSlice';
 import playlistSlice from './playlistSlice';
+import newCommentSlice from './newCommentSlice';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     category: categorySlice.reducer,
     subscriptions: subscriptionsSlice.reducer,
     playlist: playlistSlice.reducer,
+    newComment: newCommentSlice.reducer,
   },
 });
 

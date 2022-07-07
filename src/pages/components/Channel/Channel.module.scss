@@ -34,35 +34,4 @@
       }
     }
   }
-
-  .channel-right {
-    display: flex;
-    align-items: center;
-    gap: 0 $gap-min;
-
-    .btn {
-      font-size: 14px;
-      padding: 10px $padding-max;
-      border-radius: $border-radius;
-      background-color: $color-primary;
-      color: $color-white;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .subscribed {
-      background-color: transparent;
-      color: $color-text-secondary;
-      font-weight: 500;
-      padding: 0;
-    }
-    .btn-notify {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: transparent;
-      cursor: pointer;
-    }
-  }
 }

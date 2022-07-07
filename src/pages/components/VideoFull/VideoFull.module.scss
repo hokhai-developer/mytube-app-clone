@@ -45,32 +45,4 @@
       @include text-clamp(2);
     }
   }
-
-  .contain {
-    display: flex;
-    align-items: center;
-    gap: 0 $gap-max;
-    padding: $padding-min 0;
-    margin: 10px 0;
-
-    .total-comment {
-      font-size: 16px;
-      font-weight: 500;
-      color: $color-text-primary;
-    }
-
-    .sort-by {
-      display: flex;
-      align-items: center;
-      gap: 0 $gap-min;
-      cursor: pointer;
-      background-color: transparent;
-
-      .text {
-        font-size: 14px;
-        font-weight: 600;
-        color: $color-text-primary;
-      }
-    }
-  }
 }

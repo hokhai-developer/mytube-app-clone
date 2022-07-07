@@ -14,3 +14,7 @@ export const subscriptionsSelector = (state) => {
 export const playlistSelector = (state) => {
   return state.playlist;
 };
+
+export const newCommentSelector = (state) => {
+  return state.newComment;
+};

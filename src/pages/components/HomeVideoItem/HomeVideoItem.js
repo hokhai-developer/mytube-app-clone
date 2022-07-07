@@ -119,7 +119,16 @@ const HomeVideoItem = ({
       part: 'snippet',
     });
   }, [channelId]);
-
+  const handlePublishedAt = (publishedAt) => {
+    const newPublishedAt = moment(publishedAt).fromNow();
+    if (newPublishedAt.startsWith('an')) {
+      return newPublishedAt.replace('an', 1);
+    }
+    if (newPublishedAt.startsWith('a')) {
+      return newPublishedAt.replace('a', 1);
+    }
+    return newPublishedAt;
+  };
   const menuSettingItemVideoHasAuth = { ...MENU_SETTINGS_VIDEO_ITEM };
   const menuSettingItemVideoNotAuth = {
     ...MENU_SETTINGS_VIDEO_ITEM,
@@ -161,7 +170,7 @@ const HomeVideoItem = ({
           </div>
           <div className={cx('view-time')}>
             {numeral(Number(viewCount)).format('0.a')} •{' '}
-            {moment(publishedAt).fromNow()}
+            {handlePublishedAt(publishedAt)}
           </div>
         </div>
 

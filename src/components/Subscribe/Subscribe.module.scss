@@ -1,0 +1,77 @@
+@import '../GlobalStyle/GlobalStyle.module.scss';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0 $gap-min;
+
+  .btn {
+    position: relative;
+    font-size: 14px;
+    padding: 10px $padding-max;
+    border-radius: $border-radius;
+    background-color: $color-primary;
+    color: $color-white;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .subscribed {
+    background-color: $color-background-btn-hover;
+    color: $color-text-secondary;
+    font-weight: 500;
+  }
+  .btn-notify {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}
+
+//model unsubscribed
+.model-content {
+  background-color: $color-white;
+  .header {
+    padding: 24px;
+    border: 1px solid $color-border;
+    .title {
+      font-size: 14px;
+      color: $color-text-secondary;
+      text-align: center;
+    }
+  }
+
+  .bottom {
+    display: flex;
+    align-items: center;
+    align-items: s;
+    gap: 0 $gap-medium;
+    padding: 24px;
+
+    .btn {
+      font-size: 14px;
+      color: $color-text-secondary;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 10px $padding-max;
+      background-color: $color-background-btn;
+      cursor: pointer;
+      &:hover {
+        background-color: $color-background-btn-hover;
+      }
+
+      &.cancel {
+        &:hover {
+          color: $color-text-primary;
+        }
+      }
+      &.unsubscribe {
+        color: $color-secondary;
+      }
+    }
+  }
+}
