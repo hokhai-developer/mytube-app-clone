@@ -12,9 +12,10 @@ const useWindowResize = () => {
     };
     window.onresize = reportWindowSize;
     window.addEventListener('resize', reportWindowSize);
+     return ()=>{window.removeEventListener('resize', reportWindowSize)};
   }, []);
 
-  return ()=>{window.removeEventListener('resize', reportWindowSize)};
+  return windowResult;
 };
 
 export default useWindowResize;
